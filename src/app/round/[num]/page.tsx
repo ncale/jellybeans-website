@@ -1,15 +1,16 @@
 "use client";
 
-import Details from "./_components/details";
-import Pagination from "./_components/pagination";
-import Submit from "./_components/submit";
-// import LeaderboardTable from "./_components/leaderboard-table";
-
 import { useReadContract } from "wagmi";
 import { JellybeansABI } from "@/constants/JellybeansABI";
 import { jellybeansAddress } from "@/constants/contracts";
-import { numSchema } from "@/lib/types";
+import { numSchema, type RawRoundData } from "@/lib/types";
+
 import NotFound from "@/app/not-found";
+import LoadingPage from "./_pages/loading";
+import FetchFailedPage from "./_pages/fetch-failed";
+import FutureRoundPage from "./_pages/future-round";
+import PreviousRoundPage from "./_pages/previous-round";
+import CurrentRoundPage from "./_pages/current-round";
 
 export default function Page({ params }: { params: { num: string } }) {
   const { success, data: currentPage } = numSchema.safeParse(params.num);
@@ -29,39 +30,69 @@ function ValidPage({ currentPage }: { currentPage: number }) {
     args: [BigInt(currentPage)],
   });
 
-  if (isLoading) return <>Loading</>;
-  if (!isSuccess) return <>Fetch failed</>;
+  if (isLoading) return <LoadingPage />;
+  if (!isSuccess) return <FetchFailedPage />;
 
-  const [
-    question,
-    submissionDeadline,
-    potAmount,
-    feeAmount,
-    correctAnswer,
-    isFinalized,
-  ] = data;
+  const roundType = determineRoundType(data);
+  const [question, submissionDeadline, potAmount, feeAmount, correctAnswer] =
+    data;
 
-  if (Number(submissionDeadline) === 0) {
-    return <>This round does not exist</>;
-  }
-
-  if (isFinalized && Number(correctAnswer) !== 0) {
-    return <>This round is completed</>;
-  }
-
-  return (
-    <>
-      <section className="w-1/2 p-2 bg-green-50">picture</section>
-      <section className="w-1/2 p-2 space-y-8">
-        <Pagination currentPage={currentPage} />
-        <Details
-          question={question}
-          potAmount={potAmount}
-          submissionDeadline={submissionDeadline}
+  switch (roundType) {
+    case "future":
+      return (
+        <FutureRoundPage
+          data={{
+            round: currentPage,
+            question: "",
+            submissionDeadline: 0n,
+            potAmount: 0n,
+            feeAmount: 0n,
+            correctAnswer: 0n,
+            isFinalized: false,
+          }}
         />
-        <Submit feeAmount={feeAmount} />
-        {/* <LeaderboardTable /> */}
-      </section>
-    </>
-  );
+      );
+    case "current":
+      return (
+        <CurrentRoundPage
+          data={{
+            round: currentPage,
+            question,
+            submissionDeadline,
+            potAmount,
+            feeAmount,
+            correctAnswer: 0n,
+            isFinalized: false,
+          }}
+        />
+      );
+    case "previous":
+      return (
+        <PreviousRoundPage
+          data={{
+            round: currentPage,
+            question,
+            submissionDeadline,
+            potAmount,
+            feeAmount,
+            correctAnswer,
+            isFinalized: true,
+          }}
+        />
+      );
+  }
+}
+
+function determineRoundType(
+  data: RawRoundData
+): "future" | "current" | "previous" {
+  const [, submissionDeadline, , , , isFinalized] = data;
+
+  if (submissionDeadline === 0n) {
+    return "future";
+  } else if (isFinalized) {
+    return "previous";
+  } else {
+    return "current";
+  }
 }
