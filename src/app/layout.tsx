@@ -19,9 +19,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <Providers>
-          <div className="mx-24 py-4">
+          <div className="px-4 py-4 max-w-screen-lg mx-auto">
             <Header />
-            <main>{children}</main>
+            <main className="flex mt-16 gap-x-2">{children}</main>
           </div>
         </Providers>
       </body>
