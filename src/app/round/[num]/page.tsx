@@ -3,7 +3,8 @@
 import Details from "./_components/details";
 import Pagination from "./_components/pagination";
 import Submit from "./_components/submit";
-import LeaderboardTable from "./_components/leaderboard-table";
+// import LeaderboardTable from "./_components/leaderboard-table";
+
 import { useReadContract } from "wagmi";
 import { JellybeansABI } from "@/constants/JellybeansABI";
 import { jellybeansAddress } from "@/constants/contracts";
@@ -48,7 +49,7 @@ export default function Home({ params }: { params: { num: string } }) {
           submissionDeadline={submissionDeadline}
         />
         <Submit feeAmount={feeAmount} />
-        <LeaderboardTable />
+        {/* <LeaderboardTable /> */}
       </section>
     </>
   );
