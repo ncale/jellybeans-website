@@ -2,7 +2,7 @@
 
 import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
-import { optimism } from "wagmi/chains";
+import { optimismSepolia } from "wagmi/chains";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
@@ -10,7 +10,7 @@ const queryClient = new QueryClient();
 const config = getDefaultConfig({
   appName: "Jellybeans",
   projectId: "YOUR_PROJECT_ID",
-  chains: [optimism],
+  chains: [optimismSepolia],
   ssr: false,
 });
 
