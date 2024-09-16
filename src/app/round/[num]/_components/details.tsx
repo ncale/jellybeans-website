@@ -1,5 +1,6 @@
 "use client";
 
+import { timeUntil } from "@/lib/utils";
 import { formatUnits } from "viem";
 
 export default function Details({
@@ -22,7 +23,9 @@ export default function Details({
           <h4 className="text-sm text-muted-foreground">
             Round submissions end in
           </h4>
-          <p className="text-xl font-semibold">{Number(submissionDeadline)}</p>
+          <p className="text-xl font-semibold">
+            {timeUntil(submissionDeadline)}
+          </p>
         </div>
       </div>
       <p className="text-xl font-semibold">{question}</p>
