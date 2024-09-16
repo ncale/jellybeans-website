@@ -8,18 +8,29 @@ import Submit from "./_components/submit";
 import { useReadContract } from "wagmi";
 import { JellybeansABI } from "@/constants/JellybeansABI";
 import { jellybeansAddress } from "@/constants/contracts";
+import { numSchema } from "@/lib/types";
+import NotFound from "@/app/not-found";
 
-export default function Home({ params }: { params: { num: string } }) {
-  const currentPage = Number(params.num);
+export default function Page({ params }: { params: { num: string } }) {
+  const { success, data: currentPage } = numSchema.safeParse(params.num);
 
-  const { data } = useReadContract({
+  if (success) {
+    return <ValidPage currentPage={currentPage} />;
+  } else {
+    return <NotFound />;
+  }
+}
+
+function ValidPage({ currentPage }: { currentPage: number }) {
+  const { data, isLoading, isSuccess } = useReadContract({
     abi: JellybeansABI,
     address: jellybeansAddress,
     functionName: "rounds",
-    args: [BigInt(params.num)],
+    args: [BigInt(currentPage)],
   });
 
-  if (!data) return <></>;
+  if (isLoading) return <>Loading</>;
+  if (!isSuccess) return <>Fetch failed</>;
 
   const [
     question,
