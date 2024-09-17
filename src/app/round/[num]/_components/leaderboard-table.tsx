@@ -38,7 +38,7 @@ export default function LeaderboardTable({ round }: { round: number }) {
         target="_blank"
         className="flex w-fit origin-left items-center gap-x-1 hover:underline"
       >
-        <h3 className="font-semibold">Predictions</h3>
+        <h3 className="font-medium">Predictions</h3>
         <ExternalLink className="h-3 w-3" />
       </a>
       <Table>
