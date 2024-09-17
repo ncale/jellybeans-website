@@ -22,7 +22,7 @@ export default function RootLayout({
         <Providers>
           <div className="mx-auto max-w-screen-lg px-4 py-4">
             <Header />
-            <main className="mt-16 flex gap-x-2">{children}</main>
+            <main>{children}</main>
             <Toaster richColors theme="light" />
           </div>
         </Providers>
