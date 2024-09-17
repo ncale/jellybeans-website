@@ -23,13 +23,27 @@ import { writeContract } from "@wagmi/core";
 import { useConfig } from "wagmi";
 import { JellybeansABI } from "@/constants/JellybeansABI";
 import { jellybeansAddress } from "@/constants/contracts";
+import { Card, CardContent } from "@/components/ui/card";
+
+export default function Submit({ round, feeAmount }: { round: number; feeAmount: bigint }) {
+  return (
+    <div className="mt-8 space-y-1">
+      <h3 className="font-medium">Submit a Prediction</h3>
+      <Card className="px-2 py-3">
+        <CardContent>
+          <SubmitForm round={round} feeAmount={feeAmount} />
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
 
 const guessFormSchema = z.object({
   guess: z.coerce.number().positive(),
 });
 type GuessForm = z.infer<typeof guessFormSchema>;
 
-export default function Submit({ round, feeAmount }: { round: number; feeAmount: bigint }) {
+function SubmitForm({ round, feeAmount }: { round: number; feeAmount: bigint }) {
   const config = useConfig();
   const form = useForm<GuessForm>({
     resolver: zodResolver(guessFormSchema),
@@ -49,6 +63,7 @@ export default function Submit({ round, feeAmount }: { round: number; feeAmount:
       });
       toast.success("Success! Your guess was submitted.");
     } catch (error) {
+      console.error(error);
       toast.error("Oops! Something went wrong.");
     }
 
