@@ -4,6 +4,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 
 import Header from "@/components/header";
 import Providers from "./providers";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Jellybeans",
@@ -22,6 +23,7 @@ export default function RootLayout({
           <div className="px-4 py-4 max-w-screen-lg mx-auto">
             <Header />
             <main className="flex mt-16 gap-x-2">{children}</main>
+            <Toaster richColors theme="light" />
           </div>
         </Providers>
       </body>
