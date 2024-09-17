@@ -46,9 +46,7 @@ export default function CustomConnectButton() {
                 <div className="flex gap-3">
                   <Button onClick={openAccountModal} type="button">
                     {account.displayName}
-                    {account.displayBalance
-                      ? ` (${account.displayBalance})`
-                      : ""}
+                    {account.displayBalance ? ` (${account.displayBalance})` : ""}
                   </Button>
                 </div>
               );

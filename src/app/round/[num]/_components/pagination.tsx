@@ -6,25 +6,13 @@ import Link from "next/link";
 
 export default function Pagination({ currentPage }: { currentPage: number }) {
   return (
-    <div className="flex items-center text-sm gap-x-2">
-      <Button
-        variant="outline"
-        size="icon"
-        className="w-5 h-5 rounded-full"
-        disabled
-        asChild
-      >
+    <div className="flex items-center gap-x-2 text-sm">
+      <Button variant="outline" size="icon" className="h-5 w-5 rounded-full" disabled asChild>
         <Link href={`/round/${currentPage - 1}`}>
           <ArrowLeft />
         </Link>
       </Button>
-      <Button
-        variant="outline"
-        size="icon"
-        className="w-5 h-5 rounded-full"
-        disabled
-        asChild
-      >
+      <Button variant="outline" size="icon" className="h-5 w-5 rounded-full" disabled asChild>
         <Link href={`/round/${currentPage + 1}`}>
           <ArrowRight />
         </Link>

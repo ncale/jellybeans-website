@@ -20,9 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <Providers>
-          <div className="px-4 py-4 max-w-screen-lg mx-auto">
+          <div className="mx-auto max-w-screen-lg px-4 py-4">
             <Header />
-            <main className="flex mt-16 gap-x-2">{children}</main>
+            <main className="mt-16 flex gap-x-2">{children}</main>
             <Toaster richColors theme="light" />
           </div>
         </Providers>

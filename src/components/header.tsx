@@ -4,11 +4,11 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <header className="flex justify-between items-center">
+    <header className="flex items-center justify-between">
       <Link href={"/"}>
-        <h2 className="font-bold text-2xl">Jelly beans</h2>
+        <h2 className="text-2xl font-bold">Jelly beans</h2>
       </Link>
-      <div className="gap-x-2 flex items-center">
+      <div className="flex items-center gap-x-2">
         <Button variant="outline">Resources</Button>
         <Button variant="outline">Names</Button>
         <CustomConnectButton />

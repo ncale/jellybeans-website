@@ -20,12 +20,8 @@ export default function Details({
           <p className="text-xl font-semibold">{formatUnits(potAmount, 0)}</p>
         </div>
         <div className="">
-          <h4 className="text-sm text-muted-foreground">
-            Round submissions end in
-          </h4>
-          <p className="text-xl font-semibold">
-            {timeUntil(submissionDeadline)}
-          </p>
+          <h4 className="text-sm text-muted-foreground">Round submissions end in</h4>
+          <p className="text-xl font-semibold">{timeUntil(submissionDeadline)}</p>
         </div>
       </div>
       <p className="text-xl font-semibold">{question}</p>

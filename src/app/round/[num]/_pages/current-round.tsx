@@ -8,8 +8,8 @@ import Submit from "../_components/submit";
 export default function CurrentRoundPage({ data }: { data: CurrentRoundData }) {
   return (
     <>
-      <section className="w-1/2 p-2 bg-green-50">picture</section>
-      <section className="w-1/2 p-2 space-y-8">
+      <section className="w-1/2 bg-green-50 p-2">picture</section>
+      <section className="w-1/2 space-y-8 p-2">
         <Pagination currentPage={data.round} />
         <Details
           question={data.question}

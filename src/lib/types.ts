@@ -7,14 +7,7 @@ export type NumType = z.infer<typeof numSchema>;
 
 // DATA
 
-export type RawRoundData = readonly [
-  string,
-  bigint,
-  bigint,
-  bigint,
-  bigint,
-  boolean
-];
+export type RawRoundData = readonly [string, bigint, bigint, bigint, bigint, boolean];
 
 export type PreviousRoundData = {
   round: number;

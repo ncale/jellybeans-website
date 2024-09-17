@@ -34,8 +34,7 @@ function ValidPage({ currentPage }: { currentPage: number }) {
   if (!isSuccess) return <FetchFailedPage />;
 
   const roundType = determineRoundType(data);
-  const [question, submissionDeadline, potAmount, feeAmount, correctAnswer] =
-    data;
+  const [question, submissionDeadline, potAmount, feeAmount, correctAnswer] = data;
 
   switch (roundType) {
     case "future":
@@ -83,9 +82,7 @@ function ValidPage({ currentPage }: { currentPage: number }) {
   }
 }
 
-function determineRoundType(
-  data: RawRoundData
-): "future" | "current" | "previous" {
+function determineRoundType(data: RawRoundData): "future" | "current" | "previous" {
   const [, submissionDeadline, , , , isFinalized] = data;
 
   if (submissionDeadline === 0n) {

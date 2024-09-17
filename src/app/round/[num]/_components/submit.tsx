@@ -29,13 +29,7 @@ const guessFormSchema = z.object({
 });
 type GuessForm = z.infer<typeof guessFormSchema>;
 
-export default function Submit({
-  round,
-  feeAmount,
-}: {
-  round: number;
-  feeAmount: bigint;
-}) {
+export default function Submit({ round, feeAmount }: { round: number; feeAmount: bigint }) {
   const config = useConfig();
   const form = useForm<GuessForm>({
     resolver: zodResolver(guessFormSchema),
@@ -64,7 +58,7 @@ export default function Submit({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex gap-x-2 font-bold text-md">
+        <div className="text-md flex gap-x-2 font-bold">
           <FormField
             control={form.control}
             name="guess"
@@ -85,11 +79,7 @@ export default function Submit({
               </FormItem>
             )}
           />
-          <Button
-            variant="secondary"
-            type="submit"
-            disabled={form.formState.isSubmitting}
-          >
+          <Button variant="secondary" type="submit" disabled={form.formState.isSubmitting}>
             Submit
           </Button>
         </div>
