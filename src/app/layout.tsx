@@ -21,9 +21,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <Providers>
-          <div className="mx-auto max-w-screen-lg px-4 py-4">
+          <div className="mx-auto max-w-screen-lg px-4">
             <Header />
-            <main>{children}</main>
+            <main className="mt-4">{children}</main>
             <Footer />
             <Toaster richColors theme="light" />
           </div>

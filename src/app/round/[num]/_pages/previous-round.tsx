@@ -11,7 +11,7 @@ import { TOTAL_PAGES } from "@/constants/data";
 export default function PreviousRoundPage({ data }: { data: PreviousRoundData }) {
   return (
     <>
-      <section className="mt-16 flex gap-x-2">
+      <section className="flex gap-x-2">
         <section className="hidden aspect-square w-1/2 p-2 md:block">
           <div className="h-full w-full bg-red-50" />
         </section>
@@ -27,7 +27,7 @@ export default function PreviousRoundPage({ data }: { data: PreviousRoundData })
           <WinnersTable round={data.round} />
         </section>
       </section>
-      <section className="mt-16">
+      <section className="mt-12">
         <LeaderboardTable round={data.round} />
       </section>
     </>

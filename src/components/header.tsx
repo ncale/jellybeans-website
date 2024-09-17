@@ -6,9 +6,9 @@ import { cn } from "@/lib/utils";
 
 export default function Header() {
   return (
-    <header className="flex items-center justify-between">
+    <header className="flex items-end justify-between py-6">
       <Link href={"/"}>
-        <h2 className="text-2xl font-bold">Jelly beans</h2>
+        <h2 className="text-3xl font-bold">Jelly beans</h2>
       </Link>
       <div className="flex items-center gap-x-2">
         <NavItem href={DOCS_URL}>
