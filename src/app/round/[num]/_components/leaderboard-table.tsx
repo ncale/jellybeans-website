@@ -27,7 +27,7 @@ export default function LeaderboardTable({ round }: { round: number }) {
   });
 
   if (isLoading) return <>Loading...</>;
-  if (!isSuccess) return <>Loading...</>;
+  if (!isSuccess) return <>No data</>;
 
   const [address, submission] = data;
 
