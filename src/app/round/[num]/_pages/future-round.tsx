@@ -10,7 +10,7 @@ export default function FutureRoundPage({ data }: { data: FutureRoundData }) {
     <>
       <section className="flex gap-x-2">
         <section className="hidden aspect-square w-1/2 p-2 md:block">
-          <div className="h-full w-full bg-red-50" />
+          <div className="h-full w-full border bg-red-50" />
         </section>
         <section className="space-y-9 p-2 md:w-1/2">
           <div className="space-y-4">

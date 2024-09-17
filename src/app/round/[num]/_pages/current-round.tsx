@@ -7,16 +7,17 @@ import Submit from "../_components/submit";
 import LeaderboardTable from "../_components/leaderboard-table";
 
 import { TOTAL_PAGES } from "@/constants/data";
+import { Pill } from "@/components/ui/pill";
 
 export default function CurrentRoundPage({ data }: { data: CurrentRoundData }) {
   return (
     <>
       <section className="flex gap-x-2">
         <section className="hidden aspect-square w-1/2 p-2 md:block">
-          <div className="h-full w-full bg-red-50" />
+          <div className="h-full w-full border bg-red-50" />
         </section>
-        <section className="space-y-9 p-2 md:w-1/2">
-          <div className="space-y-4">
+        <section className="p-2 md:w-1/2">
+          <div className="mb-9 space-y-4">
             <Pagination currentPage={data.round} totalPages={TOTAL_PAGES} />
             <Details
               question={data.question}
@@ -29,6 +30,12 @@ export default function CurrentRoundPage({ data }: { data: CurrentRoundData }) {
             feeAmount={data.feeAmount}
             submissionDeadline={data.submissionDeadline}
           />
+          <div className="mt-4 space-y-1">
+            <h3 className="font-medium">Your Submissions</h3>
+            <div className="flex flex-wrap gap-1">
+              <Pill variant="outline">n/a</Pill>
+            </div>
+          </div>
         </section>
       </section>
       <section className="mt-12">
