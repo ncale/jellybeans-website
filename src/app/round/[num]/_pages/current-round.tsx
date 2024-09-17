@@ -6,6 +6,8 @@ import Pagination from "../_components/pagination";
 import Submit from "../_components/submit";
 import LeaderboardTable from "../_components/leaderboard-table";
 
+import { TOTAL_PAGES } from "@/constants/data";
+
 export default function CurrentRoundPage({ data }: { data: CurrentRoundData }) {
   return (
     <>
@@ -14,7 +16,7 @@ export default function CurrentRoundPage({ data }: { data: CurrentRoundData }) {
       </section>
       <section className="w-1/2 space-y-9 p-2">
         <div className="space-y-4">
-          <Pagination currentPage={data.round} />
+          <Pagination currentPage={data.round} totalPages={TOTAL_PAGES} />
           <Details
             question={data.question}
             potAmount={data.potAmount}
