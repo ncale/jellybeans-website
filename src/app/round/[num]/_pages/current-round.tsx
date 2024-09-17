@@ -16,7 +16,7 @@ export default function CurrentRoundPage({ data }: { data: CurrentRoundData }) {
           potAmount={data.potAmount}
           submissionDeadline={data.submissionDeadline}
         />
-        <Submit feeAmount={data.feeAmount} />
+        <Submit round={data.round} feeAmount={data.feeAmount} />
         {/* <LeaderboardTable /> */}
       </section>
     </>
