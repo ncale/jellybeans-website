@@ -1,7 +1,8 @@
-import { Button } from "./ui/button";
 import CustomConnectButton from "./connect-button";
 import Link from "next/link";
-import { LibraryBig, MessagesSquare } from "lucide-react";
+import { LibraryBig } from "lucide-react";
+import { DOCS_URL } from "@/constants/data";
+import { cn } from "@/lib/utils";
 
 export default function Header() {
   return (
@@ -10,16 +11,28 @@ export default function Header() {
         <h2 className="text-2xl font-bold">Jelly beans</h2>
       </Link>
       <div className="flex items-center gap-x-2">
-        <Button variant="outline" className="hidden gap-x-2 md:flex">
+        <NavItem href={DOCS_URL}>
           <LibraryBig className="h-4 w-4" />
-          Resources
-        </Button>
-        <Button variant="outline" className="hidden gap-x-2 md:flex">
-          <MessagesSquare className="h-4 w-4" />
-          Names
-        </Button>
+          <span className="ml-2 hidden md:flex">Resources</span>
+        </NavItem>
         <CustomConnectButton />
       </div>
     </header>
+  );
+}
+
+function NavItem({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      className={cn(
+        "inline-flex items-center justify-center whitespace-nowrap rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+        "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+        "h-9 px-4 py-2",
+      )}
+    >
+      {children}
+    </a>
   );
 }
