@@ -3,9 +3,10 @@
 import { type PreviousRoundData } from "@/lib/types";
 import Pagination from "../_components/pagination";
 import PreviousRoundDetails from "../_components/previous-round-details";
+import WinnersTable from "../_components/winners-table";
+import LeaderboardTable from "../_components/leaderboard-table";
 
 import { TOTAL_PAGES } from "@/constants/data";
-import LeaderboardTable from "../_components/leaderboard-table";
 
 export default function PreviousRoundPage({ data }: { data: PreviousRoundData }) {
   return (
@@ -23,6 +24,7 @@ export default function PreviousRoundPage({ data }: { data: PreviousRoundData })
               correctAnswer={data.correctAnswer}
             />
           </div>
+          <WinnersTable round={data.round} />
         </section>
       </section>
       <section className="mt-16">
