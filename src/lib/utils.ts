@@ -5,26 +5,16 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function isFutureTimestamp(timestamp: bigint): boolean {
-  const now = BigInt(Math.floor(Date.now() / 1000));
-  return timestamp > now;
-}
+export function formatSeconds(seconds: bigint): string {
+  if (seconds === 0n) return "Closed";
 
-export function timeUntil(futureTimestamp: bigint): string {
-  const now = BigInt(Math.floor(Date.now() / 1000));
-  const diff = futureTimestamp - now;
-
-  if (diff <= 0n) {
-    return "Closed";
-  }
-
-  const minutes = diff / 60n;
+  const minutes = seconds / 60n;
   const hours = minutes / 60n;
   const days = hours / 24n;
 
   const remainingHours = hours % 24n;
   const remainingMinutes = minutes % 60n;
-  const remainingSeconds = diff % 60n;
+  const remainingSeconds = seconds % 60n;
 
   let result = "";
   if (days > 0n) result += `${days}d `;

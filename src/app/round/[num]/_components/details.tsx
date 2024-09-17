@@ -1,7 +1,7 @@
 "use client";
 
-import { isFutureTimestamp, timeUntil } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { useCountdown, useCountdownPassed } from "@/lib/hooks";
+import { formatSeconds } from "@/lib/utils";
 import { formatUnits } from "viem";
 
 export default function Details({
@@ -13,6 +13,7 @@ export default function Details({
   potAmount: bigint;
   submissionDeadline: bigint;
 }) {
+  const isSubmissionPassed = useCountdownPassed(submissionDeadline);
   return (
     <div className="space-y-4">
       <div className="flex">
@@ -23,7 +24,7 @@ export default function Details({
         <div>
           <h4 className="text-sm text-muted-foreground">
             {"Round submissions"}
-            {isFutureTimestamp(submissionDeadline) ? " end in" : ""}
+            {isSubmissionPassed ? "" : " end in"}
           </h4>
           <p className="text-xl font-semibold">
             <CountdownText timestamp={submissionDeadline} />
@@ -36,10 +37,6 @@ export default function Details({
 }
 
 function CountdownText({ timestamp }: { timestamp: bigint }) {
-  const [, forceUpdate] = useState({});
-  useEffect(() => {
-    const intervalId = setInterval(() => forceUpdate({}), 1000);
-    return () => clearInterval(intervalId);
-  }, []);
-  return timeUntil(timestamp);
+  const { timeLeft } = useCountdown(timestamp);
+  return formatSeconds(timeLeft);
 }

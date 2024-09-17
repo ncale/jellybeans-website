@@ -24,7 +24,11 @@ export default function CurrentRoundPage({ data }: { data: CurrentRoundData }) {
               submissionDeadline={data.submissionDeadline}
             />
           </div>
-          <Submit round={data.round} feeAmount={data.feeAmount} />
+          <Submit
+            round={data.round}
+            feeAmount={data.feeAmount}
+            submissionDeadline={data.submissionDeadline}
+          />
         </section>
       </section>
       <section className="mt-16">

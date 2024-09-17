@@ -24,14 +24,23 @@ import { useConfig } from "wagmi";
 import { JellybeansABI } from "@/constants/JellybeansABI";
 import { jellybeansAddress } from "@/constants/contracts";
 import { Card, CardContent } from "@/components/ui/card";
+import { useCountdownPassed } from "@/lib/hooks";
 
-export default function Submit({ round, feeAmount }: { round: number; feeAmount: bigint }) {
+export default function Submit({
+  round,
+  feeAmount,
+  submissionDeadline,
+}: {
+  round: number;
+  feeAmount: bigint;
+  submissionDeadline: bigint;
+}) {
   return (
     <div className="mt-8 space-y-1">
       <h3 className="font-medium">Submit a Prediction</h3>
       <Card className="px-2 py-3">
         <CardContent>
-          <SubmitForm round={round} feeAmount={feeAmount} />
+          <SubmitForm round={round} feeAmount={feeAmount} submissionDeadline={submissionDeadline} />
         </CardContent>
       </Card>
     </div>
@@ -43,12 +52,22 @@ const guessFormSchema = z.object({
 });
 type GuessForm = z.infer<typeof guessFormSchema>;
 
-function SubmitForm({ round, feeAmount }: { round: number; feeAmount: bigint }) {
+function SubmitForm({
+  round,
+  feeAmount,
+  submissionDeadline,
+}: {
+  round: number;
+  feeAmount: bigint;
+  submissionDeadline: bigint;
+}) {
   const config = useConfig();
   const form = useForm<GuessForm>({
     resolver: zodResolver(guessFormSchema),
     defaultValues: { guess: 0 },
   });
+
+  const isSubmissionPassed = useCountdownPassed(submissionDeadline);
 
   async function onSubmit(values: GuessForm) {
     console.log(values);
@@ -83,6 +102,7 @@ function SubmitForm({ round, feeAmount }: { round: number; feeAmount: bigint }) 
                 <FormControl>
                   <Input
                     placeholder="Enter a guess"
+                    disabled={isSubmissionPassed}
                     onFocus={(e) => e.target.select()}
                     {...field}
                   />
@@ -94,7 +114,11 @@ function SubmitForm({ round, feeAmount }: { round: number; feeAmount: bigint }) 
               </FormItem>
             )}
           />
-          <Button variant="secondary" type="submit" disabled={form.formState.isSubmitting}>
+          <Button
+            variant="secondary"
+            type="submit"
+            disabled={form.formState.isSubmitting || isSubmissionPassed}
+          >
             Submit
           </Button>
         </div>
