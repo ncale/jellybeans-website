@@ -12,13 +12,15 @@ export default function CurrentRoundPage({ data }: { data: CurrentRoundData }) {
       <section className="w-1/2 p-2">
         <div className="h-full w-full bg-red-50" />
       </section>
-      <section className="w-1/2 space-y-8 p-2">
-        <Pagination currentPage={data.round} />
-        <Details
-          question={data.question}
-          potAmount={data.potAmount}
-          submissionDeadline={data.submissionDeadline}
-        />
+      <section className="w-1/2 space-y-9 p-2">
+        <div className="space-y-4">
+          <Pagination currentPage={data.round} />
+          <Details
+            question={data.question}
+            potAmount={data.potAmount}
+            submissionDeadline={data.submissionDeadline}
+          />
+        </div>
         <Submit round={data.round} feeAmount={data.feeAmount} />
         <LeaderboardTable round={data.round} />
       </section>

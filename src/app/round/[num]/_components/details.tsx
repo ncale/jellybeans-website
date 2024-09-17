@@ -14,13 +14,13 @@ export default function Details({
   submissionDeadline: bigint;
 }) {
   return (
-    <div className="space-y-2">
+    <div className="space-y-4">
       <div className="flex">
         <div className="min-w-32">
           <h4 className="text-sm text-muted-foreground">Pot</h4>
           <p className="text-xl font-semibold">{formatUnits(potAmount, 0)}</p>
         </div>
-        <div className="">
+        <div>
           <h4 className="text-sm text-muted-foreground">Round submissions end in</h4>
           <p className="text-xl font-semibold">
             <CountdownText timestamp={submissionDeadline} />
