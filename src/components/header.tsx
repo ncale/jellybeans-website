@@ -1,6 +1,7 @@
 import { Button } from "./ui/button";
 import CustomConnectButton from "./connect-button";
 import Link from "next/link";
+import { LibraryBig, MessagesSquare } from "lucide-react";
 
 export default function Header() {
   return (
@@ -9,10 +10,12 @@ export default function Header() {
         <h2 className="text-2xl font-bold">Jelly beans</h2>
       </Link>
       <div className="flex items-center gap-x-2">
-        <Button variant="outline" className="hidden md:flex">
+        <Button variant="outline" className="hidden gap-x-2 md:flex">
+          <LibraryBig className="h-4 w-4" />
           Resources
         </Button>
-        <Button variant="outline" className="hidden md:flex">
+        <Button variant="outline" className="hidden gap-x-2 md:flex">
+          <MessagesSquare className="h-4 w-4" />
           Names
         </Button>
         <CustomConnectButton />
