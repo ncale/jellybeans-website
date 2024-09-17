@@ -9,8 +9,12 @@ export default function Header() {
         <h2 className="text-2xl font-bold">Jelly beans</h2>
       </Link>
       <div className="flex items-center gap-x-2">
-        <Button variant="outline">Resources</Button>
-        <Button variant="outline">Names</Button>
+        <Button variant="outline" className="hidden md:flex">
+          Resources
+        </Button>
+        <Button variant="outline" className="hidden md:flex">
+          Names
+        </Button>
         <CustomConnectButton />
       </div>
     </header>
