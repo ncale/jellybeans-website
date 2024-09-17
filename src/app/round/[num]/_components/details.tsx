@@ -1,6 +1,7 @@
 "use client";
 
 import { timeUntil } from "@/lib/utils";
+import { useEffect, useState } from "react";
 import { formatUnits } from "viem";
 
 export default function Details({
@@ -21,10 +22,21 @@ export default function Details({
         </div>
         <div className="">
           <h4 className="text-sm text-muted-foreground">Round submissions end in</h4>
-          <p className="text-xl font-semibold">{timeUntil(submissionDeadline)}</p>
+          <p className="text-xl font-semibold">
+            <CountdownText timestamp={submissionDeadline} />
+          </p>
         </div>
       </div>
       <p className="text-xl font-semibold">{question}</p>
     </div>
   );
+}
+
+function CountdownText({ timestamp }: { timestamp: bigint }) {
+  const [, forceUpdate] = useState({});
+  useEffect(() => {
+    const intervalId = setInterval(() => forceUpdate({}), 1000);
+    return () => clearInterval(intervalId);
+  }, []);
+  return timeUntil(timestamp);
 }
