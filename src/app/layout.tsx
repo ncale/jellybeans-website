@@ -3,6 +3,7 @@ import "./globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
 
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 import Providers from "./providers";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -23,6 +24,7 @@ export default function RootLayout({
           <div className="mx-auto max-w-screen-lg px-4 py-4">
             <Header />
             <main>{children}</main>
+            <Footer />
             <Toaster richColors theme="light" />
           </div>
         </Providers>
