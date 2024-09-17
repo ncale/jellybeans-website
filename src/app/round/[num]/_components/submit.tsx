@@ -10,7 +10,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
 import { formatEther } from "viem";
@@ -25,6 +24,7 @@ import { JellybeansABI } from "@/constants/JellybeansABI";
 import { jellybeansAddress } from "@/constants/contracts";
 import { Card, CardContent } from "@/components/ui/card";
 import { useCountdownPassed } from "@/lib/hooks";
+import { Lightbulb } from "lucide-react";
 
 export default function Submit({
   round,
@@ -38,7 +38,7 @@ export default function Submit({
   return (
     <div className="mt-8 space-y-1">
       <h3 className="font-medium">Submit a Prediction</h3>
-      <Card className="px-2 py-3">
+      <Card className="px-4 py-5">
         <CardContent>
           <SubmitForm round={round} feeAmount={feeAmount} submissionDeadline={submissionDeadline} />
         </CardContent>
@@ -80,13 +80,14 @@ function SubmitForm({
         args: [BigInt(round), BigInt(values.guess)],
         value: feeAmount,
       });
+
       toast.success("Success! Your guess was submitted.");
+      form.reset();
     } catch (error) {
       console.error(error);
+
       toast.error("Oops! Something went wrong.");
     }
-
-    form.reset();
   }
 
   return (
@@ -100,14 +101,18 @@ function SubmitForm({
               <FormItem className="grow">
                 <FormLabel className="sr-only">Guess</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="Enter a guess"
-                    disabled={isSubmissionPassed}
-                    onFocus={(e) => e.target.select()}
-                    {...field}
-                  />
+                  <div className="flex h-9 w-full items-center gap-x-1.5 rounded-md border border-input bg-transparent py-1 pl-3 shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+                    <Lightbulb className="h-5 w-5 text-muted-foreground" />
+                    <input
+                      placeholder="Enter a guess"
+                      disabled={isSubmissionPassed}
+                      onFocus={(e) => e.target.select()}
+                      className="flex h-9 w-full rounded-md bg-transparent transition-colors focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                      {...field}
+                    />
+                  </div>
                 </FormControl>
-                <FormDescription>
+                <FormDescription className="mt-1">
                   * Submitting requires a {formatEther(feeAmount)} ETH fee
                 </FormDescription>
                 <FormMessage />
