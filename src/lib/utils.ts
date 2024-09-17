@@ -5,12 +5,17 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export function isFutureTimestamp(timestamp: bigint): boolean {
+  const now = BigInt(Math.floor(Date.now() / 1000));
+  return timestamp > now;
+}
+
 export function timeUntil(futureTimestamp: bigint): string {
   const now = BigInt(Math.floor(Date.now() / 1000));
   const diff = futureTimestamp - now;
 
   if (diff <= 0n) {
-    return "0s";
+    return "Closed";
   }
 
   const minutes = diff / 60n;

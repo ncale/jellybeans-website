@@ -1,6 +1,6 @@
 "use client";
 
-import { timeUntil } from "@/lib/utils";
+import { isFutureTimestamp, timeUntil } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { formatUnits } from "viem";
 
@@ -21,7 +21,10 @@ export default function Details({
           <p className="text-xl font-semibold">{formatUnits(potAmount, 0)}</p>
         </div>
         <div>
-          <h4 className="text-sm text-muted-foreground">Round submissions end in</h4>
+          <h4 className="text-sm text-muted-foreground">
+            {"Round submissions"}
+            {isFutureTimestamp(submissionDeadline) ? " end in" : ""}
+          </h4>
           <p className="text-xl font-semibold">
             <CountdownText timestamp={submissionDeadline} />
           </p>
