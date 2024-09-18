@@ -2,7 +2,7 @@
 
 import { formatUnits } from "viem";
 
-export default function PreviousRoundDetails({
+export default function PastRoundDetails({
   question,
   potAmount,
   correctAnswer,

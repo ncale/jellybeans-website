@@ -1,6 +1,5 @@
 "use client";
 
-import { CurrentRoundData } from "@/lib/types";
 import Details from "../_components/details";
 import Pagination from "../_components/pagination";
 import Submit from "../_components/submit";
@@ -8,8 +7,9 @@ import LeaderboardTable from "../_components/leaderboard-table";
 
 import { TOTAL_PAGES } from "@/constants/data";
 import { Pill } from "@/components/ui/pill";
+import { type ActiveRoundData } from "@/lib/types";
 
-export default function CurrentRoundPage({ data }: { data: CurrentRoundData }) {
+export default function ActiveRoundPage({ data }: { data: ActiveRoundData }) {
   return (
     <>
       <section className="flex gap-x-2">
@@ -18,7 +18,7 @@ export default function CurrentRoundPage({ data }: { data: CurrentRoundData }) {
         </section>
         <section className="p-2 md:w-1/2">
           <div className="mb-9 space-y-4">
-            <Pagination currentPage={data.round} totalPages={TOTAL_PAGES} />
+            <Pagination currentPage={data.id} totalPages={TOTAL_PAGES} />
             <Details
               question={data.question}
               potAmount={data.potAmount}
@@ -26,7 +26,7 @@ export default function CurrentRoundPage({ data }: { data: CurrentRoundData }) {
             />
           </div>
           <Submit
-            round={data.round}
+            round={data.id}
             feeAmount={data.feeAmount}
             submissionDeadline={data.submissionDeadline}
           />
@@ -39,7 +39,7 @@ export default function CurrentRoundPage({ data }: { data: CurrentRoundData }) {
         </section>
       </section>
       <section className="mt-12">
-        <LeaderboardTable round={data.round} />
+        <LeaderboardTable round={data.id} />
       </section>
     </>
   );

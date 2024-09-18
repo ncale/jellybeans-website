@@ -10,6 +10,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Card, CardContent } from "@/components/ui/card";
+import { Lightbulb } from "lucide-react";
 import { toast } from "sonner";
 
 import { formatEther } from "viem";
@@ -22,9 +24,7 @@ import { writeContract } from "@wagmi/core";
 import { useConfig } from "wagmi";
 import { JellybeansABI } from "@/constants/JellybeansABI";
 import { jellybeansAddress } from "@/constants/contracts";
-import { Card, CardContent } from "@/components/ui/card";
 import { useCountdownPassed } from "@/lib/hooks";
-import { Lightbulb } from "lucide-react";
 
 export default function Submit({
   round,
