@@ -4,7 +4,7 @@ import Pagination from "../_components/pagination";
 import PastRoundDetails from "../_components/past-round-details";
 import WinnersTable from "../_components/winners-table";
 import YourSubmissions from "../_components/your-submissions";
-import LeaderboardTable from "../_components/leaderboard-table";
+import RecentSubmissions from "../_components/recent-submissions";
 
 import { TOTAL_PAGES } from "@/constants/data";
 import { type PastRoundData } from "@/lib/types";
@@ -30,7 +30,7 @@ export default function PastRoundPage({ data }: { data: PastRoundData }) {
         </section>
       </section>
       <section className="mt-12">
-        <LeaderboardTable round={data.id} />
+        <RecentSubmissions round={data.id} />
       </section>
     </>
   );

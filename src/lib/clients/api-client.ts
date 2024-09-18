@@ -29,6 +29,23 @@ query UserSubmissions {
       entry
       round
       txnHash
+			submitter
+    }
+  }
+}
+`;
+
+export const GET_RECENT_SUBMISSIONS = (round: number) => `
+query RecentSubmissions {
+  submissions(
+    where: { round: "${round}" }
+		limit: 7
+  ) {
+    items {
+      entry
+      round
+      txnHash
+			submitter
     }
   }
 }
@@ -48,6 +65,11 @@ export default class ApiClient {
 
   async getUserRoundSubmissions(address: Address, round: number): Promise<RawSubmissionsData> {
     const query = GET_USER_SUBMISSIONS(address, round);
+    return this.client.query<RawSubmissionsData>(query);
+  }
+
+  async getRecentSubmissions(round: number): Promise<RawSubmissionsData> {
+    const query = GET_RECENT_SUBMISSIONS(round);
     return this.client.query<RawSubmissionsData>(query);
   }
 }

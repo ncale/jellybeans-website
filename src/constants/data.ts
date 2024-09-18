@@ -12,3 +12,4 @@ export const DOCS_URL =
 export const NAMES_URL = "https://names.wannabet.cc/";
 export const LICENSE_URL = "https://github.com/ncale/jellybeans-website/blob/main/LICENSE/";
 export const BLOCKSCOUT_BASE_URL = "https://optimism-sepolia.blockscout.com/";
+export const DUNE_SUBMISSIONS_URL = "https://dune.com/";

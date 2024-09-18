@@ -4,7 +4,7 @@ import Details from "../_components/details";
 import Pagination from "../_components/pagination";
 import Submit from "../_components/submit";
 import YourSubmissions from "../_components/your-submissions";
-import LeaderboardTable from "../_components/leaderboard-table";
+import RecentSubmissions from "../_components/recent-submissions";
 
 import { TOTAL_PAGES } from "@/constants/data";
 import { type ActiveRoundData } from "@/lib/types";
@@ -34,7 +34,7 @@ export default function ActiveRoundPage({ data }: { data: ActiveRoundData }) {
         </section>
       </section>
       <section className="mt-12">
-        <LeaderboardTable round={data.id} />
+        <RecentSubmissions round={data.id} />
       </section>
     </>
   );
