@@ -3,10 +3,10 @@
 import Pagination from "../_components/pagination";
 import PastRoundDetails from "../_components/past-round-details";
 import WinnersTable from "../_components/winners-table";
+import YourSubmissions from "../_components/your-submissions";
 import LeaderboardTable from "../_components/leaderboard-table";
 
 import { TOTAL_PAGES } from "@/constants/data";
-import { Pill } from "@/components/ui/pill";
 import { type PastRoundData } from "@/lib/types";
 
 export default function PastRoundPage({ data }: { data: PastRoundData }) {
@@ -26,12 +26,7 @@ export default function PastRoundPage({ data }: { data: PastRoundData }) {
             />
           </div>
           <WinnersTable round={data.id} />
-          <div className="mt-4 space-y-1">
-            <h3 className="font-medium">Your Submissions</h3>
-            <div className="flex flex-wrap gap-1">
-              <Pill variant="outline">n/a</Pill>
-            </div>
-          </div>
+          <YourSubmissions round={data.id} />
         </section>
       </section>
       <section className="mt-12">

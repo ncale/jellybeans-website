@@ -1,4 +1,4 @@
-import { Hex } from "viem";
+import { Address, Hex } from "viem";
 import { z } from "zod";
 
 // URL PARAMS
@@ -6,11 +6,15 @@ import { z } from "zod";
 export const numSchema = z.coerce.number().positive();
 export type NumType = z.infer<typeof numSchema>;
 
-// DATA
+/**
+ * --- DATA ---
+ */
+
+// ROUND
 
 export type RawRoundData = {
   round: {
-    id: string; // -> bigint
+    id: string; // -> number
     question: string;
     submissionDeadline: string; // -> bigint
     potAmount: string; // -> bigint
@@ -52,6 +56,19 @@ export type PastRoundData = {
   isFinalized: true;
   correctAnswer: bigint;
   winningAnswer: bigint;
-  winners: Hex[];
+  winners: Address[];
   setCorrectAnswerTxnHash: Hex;
+};
+
+// SUBMISSIONS
+
+export type RawSubmissionsData = {
+  submissions: {
+    items: {
+      entry: string; // -> bigint
+      round: string; // -> number
+      submitter: Address;
+      txnHash: Hex;
+    }[];
+  };
 };
