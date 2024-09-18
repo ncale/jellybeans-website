@@ -1,18 +1,23 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import apiClient from "@/lib/api";
+import { useQuery } from "@tanstack/react-query";
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
 
-export default function Pagination({
-  currentPage,
-  totalPages,
-}: {
-  currentPage: number;
-  totalPages: number;
-}) {
+export default function Pagination({ currentPage }: { currentPage: number }) {
+  const {
+    data: latestRound,
+    isLoading,
+    isSuccess,
+  } = useQuery({
+    queryKey: ["latest-round"],
+    queryFn: () => apiClient.getLatestRoundNumber(),
+  });
+
   const isPrevDisabled = currentPage <= 1;
-  const isNextDisabled = currentPage >= totalPages;
+  const isNextDisabled = isLoading || !isSuccess || currentPage >= latestRound.id;
 
   return (
     <div className="flex items-center gap-x-2 text-sm">

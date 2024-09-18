@@ -15,8 +15,6 @@ export default function YourSubmissions({ round }: { round: number }) {
     enabled: !!address,
   });
 
-  console.log(data);
-
   return (
     <div className="mt-4 space-y-1">
       <h3 className="font-medium">Your Submissions</h3>

@@ -10,6 +10,22 @@ export type NumType = z.infer<typeof numSchema>;
  * --- DATA ---
  */
 
+// LATEST ROUND
+
+export type RawLatestRoundData = {
+  rounds: {
+    items: [
+      {
+        id: string; // -> number
+      },
+    ];
+  };
+};
+
+export type LatestRound = {
+  id: number;
+};
+
 // ROUND
 
 export type RawRoundData = {

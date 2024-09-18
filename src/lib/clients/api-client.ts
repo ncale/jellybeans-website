@@ -1,6 +1,28 @@
 import GraphQLClient from "./graphql-client";
-import { type RawRoundData, type RawSubmissionsData } from "../types";
+import {
+  LatestRound,
+  RawLatestRoundData,
+  type RawRoundData,
+  type RawSubmissionsData,
+} from "../types";
 import { Address } from "viem";
+
+class MissingDataError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "MissingDataError";
+  }
+}
+
+export const GET_LATEST_ROUND_NUMBER = () => `
+query LatestRound {
+  rounds(limit: 1, orderBy: "id", orderDirection: "desc") {
+    items {
+      id
+    }
+  }
+}
+`;
 
 export const GET_ROUND = (id: number) => `
 query CurrentRound {
@@ -56,6 +78,12 @@ export default class ApiClient {
 
   constructor(baseURL: string) {
     this.client = new GraphQLClient(baseURL);
+  }
+
+  async getLatestRoundNumber(): Promise<LatestRound> {
+    const query = GET_LATEST_ROUND_NUMBER();
+    const data = await this.client.query<RawLatestRoundData>(query);
+    return { id: Number(data.rounds.items[0].id) };
   }
 
   async getRound(id: number): Promise<RawRoundData> {
