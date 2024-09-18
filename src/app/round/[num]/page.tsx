@@ -6,7 +6,6 @@ import apiClient from "@/lib/api";
 
 import NotFound from "@/app/not-found";
 import LoadingPage from "./_pages/loading";
-import FetchFailedPage from "./_pages/fetch-failed";
 import PastRoundPage from "./_pages/past-round";
 import ActiveRoundPage from "./_pages/active-round";
 
@@ -27,7 +26,7 @@ function ValidPage({ round }: { round: number }) {
   });
 
   if (isLoading) return <LoadingPage />;
-  if (!isSuccess) return <FetchFailedPage />;
+  if (!isSuccess) return <NotFound />;
 
   const formattedData = formatData(data);
 

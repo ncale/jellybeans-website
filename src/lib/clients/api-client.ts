@@ -60,7 +60,9 @@ export default class ApiClient {
 
   async getRound(id: number): Promise<RawRoundData> {
     const query = GET_ROUND(id);
-    return this.client.query<RawRoundData>(query);
+    const data = await this.client.query<RawRoundData | { round: null }>(query);
+    if (data.round === null) throw new MissingDataError(`No round of id ${id} found`);
+    return data;
   }
 
   async getUserRoundSubmissions(address: Address, round: number): Promise<RawSubmissionsData> {
