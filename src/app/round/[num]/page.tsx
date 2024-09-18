@@ -36,6 +36,8 @@ function ValidPage({ round }: { round: number }) {
       return <ActiveRoundPage data={formattedData} />;
     case "past":
       return <PastRoundPage data={formattedData} />;
+    default:
+      return <>alt</>;
   }
 }
 
