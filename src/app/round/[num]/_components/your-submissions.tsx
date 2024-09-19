@@ -21,7 +21,7 @@ export default function YourSubmissions({ round }: { round: number }) {
       <div className="flex flex-wrap gap-1">
         {isLoading && <Pill variant="outline">log in</Pill>}
         {isLoading && <>Loading...</>}
-        {!isSuccess || (data.submissions.items.length === 0 && <Pill variant="outline">n/a</Pill>)}
+        {(!isSuccess || data.submissions.items.length === 0) && <Pill variant="outline">n/a</Pill>}
         {isSuccess &&
           data.submissions.items.map((sub) => (
             <a href={`${BLOCKSCOUT_BASE_URL}tx/${sub.txnHash}/`} target="_blank" key={sub.txnHash}>

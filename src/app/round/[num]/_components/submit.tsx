@@ -20,11 +20,13 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-import { writeContract } from "@wagmi/core";
-import { useConfig } from "wagmi";
-import { JellybeansABI } from "@/constants/JellybeansABI";
+import { writeContract, waitForTransactionReceipt } from "@wagmi/core";
+import { useAccount, useConfig } from "wagmi";
+import { JellybeansAbi } from "@/constants/JellybeansAbi";
 import { jellybeansAddress } from "@/constants/contracts";
 import { useCountdownPassed } from "@/lib/hooks";
+import { useQueryClient } from "@tanstack/react-query";
+import { type RawSubmissionsData } from "@/lib/types";
 
 export default function Submit({
   round,
@@ -48,7 +50,7 @@ export default function Submit({
 }
 
 const guessFormSchema = z.object({
-  guess: z.coerce.number().positive(),
+  guess: z.coerce.number().positive().max(99999999999999), // only allows up to 14 digits; will need to refactor
 });
 type GuessForm = z.infer<typeof guessFormSchema>;
 
@@ -67,22 +69,55 @@ function SubmitForm({
     defaultValues: { guess: 0 },
   });
 
+  const { address } = useAccount();
+  const queryClient = useQueryClient();
+
   const isSubmissionPassed = useCountdownPassed(submissionDeadline);
 
   async function onSubmit(values: GuessForm) {
     console.log(values);
 
     try {
-      await writeContract(config, {
-        abi: JellybeansABI,
+      const hash = await writeContract(config, {
+        abi: JellybeansAbi,
         address: jellybeansAddress,
         functionName: "submitGuess",
         args: [BigInt(round), BigInt(values.guess)],
         value: feeAmount,
       });
+      toast.message("Pending confirmation...");
 
-      toast.success("Success! Your guess was submitted.");
+      queryClient.setQueryData(["user-submissions", address, round], (old: RawSubmissionsData) => ({
+        submissions: {
+          items: [
+            {
+              entry: values.guess.toString(),
+              round: round.toString(),
+              submitter: address!,
+              txnHash: hash,
+            },
+            ...old.submissions.items,
+          ],
+        },
+      }));
+      queryClient.setQueryData(["recent-submissions", round], (old: RawSubmissionsData) => ({
+        submissions: {
+          items: [
+            {
+              entry: values.guess.toString(),
+              round: round.toString(),
+              submitter: address!,
+              txnHash: hash,
+            },
+            ...old.submissions.items,
+          ],
+        },
+      }));
+
       form.reset();
+
+      await waitForTransactionReceipt(config, { hash });
+      toast.success("Nice! Your submission went through.");
     } catch (error) {
       console.error(error);
 

@@ -25,7 +25,7 @@ export default function RootLayout({
             <Header />
             <main className="mt-4">{children}</main>
             <Footer />
-            <Toaster richColors theme="light" />
+            <Toaster theme="light" />
           </div>
         </Providers>
       </body>
