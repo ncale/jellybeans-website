@@ -3,7 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { jellybeansAddress } from "@/constants/contracts";
-import { JellybeansABI } from "@/constants/JellybeansABI";
+import { JellybeansAbi } from "@/constants/JellybeansAbi";
 import { useReadContract } from "wagmi";
 
 export default function WinnersTable({ round }: { round: number }) {
@@ -12,7 +12,7 @@ export default function WinnersTable({ round }: { round: number }) {
     isLoading,
     isSuccess,
   } = useReadContract({
-    abi: JellybeansABI,
+    abi: JellybeansAbi,
     address: jellybeansAddress,
     functionName: "winners",
     args: [BigInt(round), BigInt(0)],

@@ -1,1 +1,1 @@
-export const jellybeansAddress = "0x010A7e7FBF07eA28edD81B9aBc4bb17228018c2A";
+export const jellybeansAddress = "0x9A34acbf83753c9a87D3b8EC721867146e67eBdC";
