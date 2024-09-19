@@ -6,7 +6,6 @@ import WinnersTable from "../_components/winners-table";
 import YourSubmissions from "../_components/your-submissions";
 import RecentSubmissions from "../_components/recent-submissions";
 
-import { TOTAL_PAGES } from "@/constants/data";
 import { type PastRoundData } from "@/lib/types";
 
 export default function PastRoundPage({ data }: { data: PastRoundData }) {
@@ -18,7 +17,7 @@ export default function PastRoundPage({ data }: { data: PastRoundData }) {
         </section>
         <section className="space-y-9 p-2 md:w-1/2">
           <div className="space-y-4">
-            <Pagination currentPage={data.id} totalPages={TOTAL_PAGES} />
+            <Pagination currentPage={data.id} />
             <PastRoundDetails
               question={data.question}
               potAmount={data.potAmount}

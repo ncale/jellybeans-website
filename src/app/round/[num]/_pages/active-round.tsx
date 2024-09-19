@@ -6,7 +6,6 @@ import Submit from "../_components/submit";
 import YourSubmissions from "../_components/your-submissions";
 import RecentSubmissions from "../_components/recent-submissions";
 
-import { TOTAL_PAGES } from "@/constants/data";
 import { type ActiveRoundData } from "@/lib/types";
 
 export default function ActiveRoundPage({ data }: { data: ActiveRoundData }) {
@@ -18,7 +17,7 @@ export default function ActiveRoundPage({ data }: { data: ActiveRoundData }) {
         </section>
         <section className="p-2 md:w-1/2">
           <div className="mb-9 space-y-4">
-            <Pagination currentPage={data.id} totalPages={TOTAL_PAGES} />
+            <Pagination currentPage={data.id} />
             <Details
               question={data.question}
               potAmount={data.potAmount}
