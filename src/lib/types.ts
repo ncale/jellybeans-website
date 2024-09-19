@@ -87,6 +87,7 @@ export type RawSubmissionsData = {
       round: string; // -> number
       submitter: Address;
       txnHash: Hex;
+      timestamp: string; // -> bigint
     }[];
   };
 };

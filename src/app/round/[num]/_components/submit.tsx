@@ -27,6 +27,7 @@ import { jellybeansAddress } from "@/constants/contracts";
 import { useCountdownPassed } from "@/lib/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import { type RawSubmissionsData } from "@/lib/types";
+import { bigintDateNow } from "@/lib/utils";
 
 export default function Submit({
   round,
@@ -87,32 +88,40 @@ function SubmitForm({
       });
       toast.message("Pending confirmation...");
 
-      queryClient.setQueryData(["user-submissions", address, round], (old: RawSubmissionsData) => ({
-        submissions: {
-          items: [
-            {
-              entry: values.guess.toString(),
-              round: round.toString(),
-              submitter: address!,
-              txnHash: hash,
-            },
-            ...old.submissions.items,
-          ],
-        },
-      }));
-      queryClient.setQueryData(["recent-submissions", round], (old: RawSubmissionsData) => ({
-        submissions: {
-          items: [
-            {
-              entry: values.guess.toString(),
-              round: round.toString(),
-              submitter: address!,
-              txnHash: hash,
-            },
-            ...old.submissions.items,
-          ],
-        },
-      }));
+      queryClient.setQueryData(
+        ["user-submissions", address, round],
+        (old: RawSubmissionsData | undefined) => ({
+          submissions: {
+            items: [
+              {
+                entry: values.guess.toString(),
+                round: round.toString(),
+                submitter: address!,
+                txnHash: hash,
+                timestamp: bigintDateNow(),
+              },
+              ...(old ? old.submissions.items : []),
+            ],
+          },
+        }),
+      );
+      queryClient.setQueryData(
+        ["recent-submissions", round],
+        (old: RawSubmissionsData | undefined) => ({
+          submissions: {
+            items: [
+              {
+                entry: values.guess.toString(),
+                round: round.toString(),
+                submitter: address!,
+                txnHash: hash,
+                timestamp: bigintDateNow(),
+              },
+              ...(old ? old.submissions.items : []),
+            ],
+          },
+        }),
+      );
 
       form.reset();
 

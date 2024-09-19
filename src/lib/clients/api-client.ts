@@ -16,7 +16,7 @@ class MissingDataError extends Error {
 
 export const GET_LATEST_ROUND_NUMBER = () => `
 query LatestRound {
-  rounds(limit: 1, orderBy: "id", orderDirection: "desc") {
+  rounds(orderBy: "id", orderDirection: "desc", limit: 1) {
     items {
       id
     }
@@ -46,12 +46,15 @@ export const GET_USER_SUBMISSIONS = (address: Address, round: number) => `
 query UserSubmissions {
   submissions(
     where: { submitter: "${address}", round: "${round}" }
+		orderBy: "entry"
+		orderDirection: "asc"
   ) {
     items {
       entry
       round
       txnHash
 			submitter
+			timestamp
     }
   }
 }
@@ -61,6 +64,8 @@ export const GET_RECENT_SUBMISSIONS = (round: number) => `
 query RecentSubmissions {
   submissions(
     where: { round: "${round}" }
+		orderBy: "timestamp"
+		orderDirection: "desc"
 		limit: 7
   ) {
     items {
@@ -68,6 +73,7 @@ query RecentSubmissions {
       round
       txnHash
 			submitter
+			timestamp
     }
   }
 }

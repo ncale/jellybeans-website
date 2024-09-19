@@ -45,7 +45,8 @@ export default function Details({
 
 function CountdownText({ timestamp }: { timestamp: bigint }) {
   const { timeLeft } = useCountdown(timestamp);
-  return formatSeconds(timeLeft);
+  const timeString = formatSeconds(timeLeft);
+  return timeString === "0s" ? "Closed" : timeString;
 }
 
 function InfoPopover({ text }: { text: string }) {

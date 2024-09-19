@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatSeconds(seconds: bigint): string {
-  if (seconds === 0n) return "Closed";
+  if (seconds === 0n) return "0s";
 
   const minutes = seconds / 60n;
   const hours = minutes / 60n;
@@ -23,4 +23,8 @@ export function formatSeconds(seconds: bigint): string {
   if (remainingSeconds > 0n) result += `${remainingSeconds}s`;
 
   return result.trim();
+}
+
+export function bigintDateNow() {
+  return BigInt(Math.floor(Date.now() / 1000));
 }

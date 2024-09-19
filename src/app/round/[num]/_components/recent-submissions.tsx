@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/table";
 import { BLOCKSCOUT_BASE_URL, DUNE_SUBMISSIONS_URL } from "@/constants/data";
 import apiClient from "@/lib/api";
+import { formatSeconds } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { ExternalLink } from "lucide-react";
 
@@ -39,7 +40,14 @@ export default function RecentSubmissions({ round }: { round: number }) {
       {isSuccess &&
         data.submissions.items.map((sub) => (
           <TableRow key={sub.txnHash}>
-            <TableCell className="py-1 text-center font-medium"></TableCell>
+            <TableCell className="py-1 text-center font-medium">
+              {
+                formatSeconds(BigInt(Math.floor(Date.now() / 1000)) - BigInt(sub.timestamp)).split(
+                  " ",
+                )[0]
+              }{" "}
+              ago
+            </TableCell>
             <TableCell className="py-1 font-medium">{sub.submitter.slice(0, 7)}...</TableCell>
             <TableCell className="py-1 text-center font-medium">{sub.entry}</TableCell>
             <TableCell className="py-1">
@@ -74,7 +82,7 @@ function RecentSubmissionsTable({ children }: { children: React.ReactNode }) {
         </TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-20 text-center font-semibold">Time</TableHead>
+            <TableHead className="w-28 text-center font-semibold">Time</TableHead>
             <TableHead className="font-semibold">Address</TableHead>
             <TableHead className="w-16 text-center font-semibold">Guess</TableHead>
             <TableHead className="w-16"></TableHead>
