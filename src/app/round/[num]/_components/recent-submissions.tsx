@@ -66,7 +66,7 @@ function RecentSubmissionsTable({ children }: { children: React.ReactNode }) {
           <a
             href={DUNE_SUBMISSIONS_URL}
             target="_blank"
-            className="mx-auto flex w-fit items-center gap-x-1 hover:underline"
+            className="mx-auto flex w-fit items-center gap-x-1.5 hover:underline"
           >
             <p>View all guesses</p>
             <ExternalLink className="h-3 w-3" />

@@ -24,7 +24,7 @@ export default function PastRoundPage({ data }: { data: PastRoundData }) {
               correctAnswer={data.correctAnswer}
             />
           </div>
-          <WinnersTable round={data.id} />
+          <WinnersTable data={data} />
           <YourSubmissions round={data.id} />
         </section>
       </section>
