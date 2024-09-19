@@ -95,11 +95,19 @@ export default class ApiClient {
 
   async getUserRoundSubmissions(address: Address, round: number): Promise<RawSubmissionsData> {
     const query = GET_USER_SUBMISSIONS(address, round);
-    return this.client.query<RawSubmissionsData>(query);
+    const data = await this.client.query<RawSubmissionsData>(query);
+    if (data.submissions.items.length === 0) {
+      throw new MissingDataError(`No submissions found for ${address} in round ${round}`);
+    }
+    return data;
   }
 
   async getRecentSubmissions(round: number): Promise<RawSubmissionsData> {
     const query = GET_RECENT_SUBMISSIONS(round);
-    return this.client.query<RawSubmissionsData>(query);
+    const data = await this.client.query<RawSubmissionsData>(query);
+    if (data.submissions.items.length === 0) {
+      throw new MissingDataError(`No submissions found in round ${round}`);
+    }
+    return data;
   }
 }
