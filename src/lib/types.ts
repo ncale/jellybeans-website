@@ -50,6 +50,7 @@ export type ActiveRoundData = {
   roundState: "active";
   id: number;
   question: string;
+  payoutDetails?: string;
   submissionDeadline: bigint;
   potAmount: bigint;
   feeAmount: bigint;
@@ -65,6 +66,7 @@ export type PastRoundData = {
   roundState: "past";
   id: number;
   question: string;
+  payoutDetails?: string;
   submissionDeadline: bigint;
   potAmount: bigint;
   feeAmount: bigint;

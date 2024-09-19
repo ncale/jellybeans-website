@@ -46,7 +46,8 @@ function formatData(data: RawRoundData): RoundData {
     return {
       roundState: "active",
       id: Number(rnd.id),
-      question: rnd.question,
+      question: rnd.question.split("||")[0].trim(),
+      payoutDetails: rnd.question.split("||")[1].trim(),
       submissionDeadline: BigInt(rnd.submissionDeadline),
       potAmount: BigInt(rnd.potAmount),
       feeAmount: BigInt(rnd.feeAmount),
@@ -61,7 +62,8 @@ function formatData(data: RawRoundData): RoundData {
     return {
       roundState: "past",
       id: Number(rnd.id),
-      question: rnd.question,
+      question: rnd.question.split("||")[0].trim(),
+      payoutDetails: rnd.question.split("||")[1].trim(),
       submissionDeadline: BigInt(rnd.submissionDeadline),
       potAmount: BigInt(rnd.potAmount),
       feeAmount: BigInt(rnd.feeAmount),

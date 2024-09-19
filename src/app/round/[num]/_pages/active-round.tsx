@@ -20,6 +20,7 @@ export default function ActiveRoundPage({ data }: { data: ActiveRoundData }) {
             <Pagination currentPage={data.id} />
             <Details
               question={data.question}
+              payoutDetails={data.payoutDetails}
               potAmount={data.potAmount}
               submissionDeadline={data.submissionDeadline}
             />
