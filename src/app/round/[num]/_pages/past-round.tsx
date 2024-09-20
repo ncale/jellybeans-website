@@ -12,11 +12,7 @@ export default function PastRoundPage({ data }: { data: PastRoundData }) {
     <>
       <div className="space-y-4">
         <Pagination currentPage={data.id} />
-        <PastRoundDetails
-          question={data.question}
-          potAmount={data.potAmount}
-          correctAnswer={data.correctAnswer}
-        />
+        <PastRoundDetails data={data} />
       </div>
       <WinnersTable data={data} />
       <YourSubmissions round={data.id} />

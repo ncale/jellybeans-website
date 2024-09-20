@@ -34,6 +34,7 @@ export type RawRoundData = {
     question: string;
     submissionDeadline: string; // -> bigint
     potAmount: string; // -> bigint
+    decimals: number;
     feeAmount: string; // -> bigint
     initRoundTxnHash: Hex;
     isFinalized: boolean;
@@ -53,6 +54,7 @@ export type ActiveRoundData = {
   payoutDetails?: string;
   submissionDeadline: bigint;
   potAmount: bigint;
+  decimals: number;
   feeAmount: bigint;
   initRoundTxnHash: Hex;
   isFinalized: false;
@@ -69,6 +71,7 @@ export type PastRoundData = {
   payoutDetails?: string;
   submissionDeadline: bigint;
   potAmount: bigint;
+  decimals: number;
   feeAmount: bigint;
   initRoundTxnHash: Hex;
   isFinalized: true;

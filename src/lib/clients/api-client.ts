@@ -32,6 +32,7 @@ query CurrentRound {
     question
     submissionDeadline
     potAmount
+		decimals
     feeAmount
     initRoundTxnHash
     isFinalized
@@ -107,6 +108,7 @@ export default class ApiClient {
         payoutDetails: rnd.question.split("||")[1].trim(),
         submissionDeadline: BigInt(rnd.submissionDeadline),
         potAmount: BigInt(rnd.potAmount),
+        decimals: rnd.decimals,
         feeAmount: BigInt(rnd.feeAmount),
         initRoundTxnHash: rnd.initRoundTxnHash,
         isFinalized: false,
@@ -123,6 +125,7 @@ export default class ApiClient {
         payoutDetails: rnd.question.split("||")[1].trim(),
         submissionDeadline: BigInt(rnd.submissionDeadline),
         potAmount: BigInt(rnd.potAmount),
+        decimals: rnd.decimals,
         feeAmount: BigInt(rnd.feeAmount),
         initRoundTxnHash: rnd.initRoundTxnHash,
         isFinalized: true,

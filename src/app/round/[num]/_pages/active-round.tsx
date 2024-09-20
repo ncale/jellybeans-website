@@ -1,6 +1,6 @@
 "use client";
 
-import Details from "../_components/details";
+import ActiveRoundDetails from "../_components/active-round-details";
 import Pagination from "../_components/pagination";
 import Submit from "../_components/submit";
 import YourSubmissions from "../_components/your-submissions";
@@ -12,12 +12,7 @@ export default function ActiveRoundPage({ data }: { data: ActiveRoundData }) {
     <>
       <div className="mb-9 space-y-4">
         <Pagination currentPage={data.id} />
-        <Details
-          question={data.question}
-          payoutDetails={data.payoutDetails}
-          potAmount={data.potAmount}
-          submissionDeadline={data.submissionDeadline}
-        />
+        <ActiveRoundDetails data={data} />
       </div>
       <Submit
         round={data.id}
