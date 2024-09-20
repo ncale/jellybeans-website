@@ -14,11 +14,11 @@ export default function PastRoundPage({ data }: { data: PastRoundData }) {
   return (
     <>
       <section className="flex gap-x-2">
-        <section className="hidden aspect-square w-1/2 p-2 md:block">
+        <section className="hidden w-1/2 p-2 md:block">
           <Image
             src={FALLBACK_IMAGE_URL}
             alt="asdf"
-            className="h-full w-full rounded border-4 border-muted-foreground"
+            className="aspect-square w-full rounded border-4 border-muted-foreground"
             width={500}
             height={500}
           />

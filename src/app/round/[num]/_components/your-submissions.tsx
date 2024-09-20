@@ -10,7 +10,7 @@ export default function YourSubmissions({ round }: { round: number }) {
   return (
     <div className="mt-4 space-y-1">
       <h3 className="font-medium">Your Submissions</h3>
-      <div className="flex flex-wrap gap-1">
+      <div className="flex max-h-32 flex-wrap gap-1 overflow-auto">
         <MappedPills round={round} />
       </div>
     </div>
