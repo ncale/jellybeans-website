@@ -54,7 +54,7 @@ function InfoPopover({ text }: { text: string }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Info className="h-3 w-3" />
+        <Info className="h-3 w-3 cursor-pointer" />
       </PopoverTrigger>
       <PopoverContent>
         {lines.map((line, i) => (
