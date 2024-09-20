@@ -10,7 +10,7 @@ export default function Footer() {
         <a
           href={LICENSE_URL}
           target="_blank"
-          className="flex items-center gap-x-1.5 hover:underline"
+          className="flex w-fit items-center gap-x-1.5 hover:underline"
         >
           <Scale className="h-4 w-4" />
           <span>MIT License</span>
