@@ -8,7 +8,9 @@ export default function Header() {
   return (
     <header className="flex items-end justify-between py-6">
       <Link href={"/"}>
-        <h2 className="text-3xl font-bold">Jelly beans</h2>
+        <h2 className="font-sugar text-3xl font-bold transition ease-in-out hover:text-foreground/50">
+          Jelly Beans
+        </h2>
       </Link>
       <div className="flex items-center gap-x-2">
         <NavItem href={DOCS_URL}>
