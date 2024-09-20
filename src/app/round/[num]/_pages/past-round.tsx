@@ -7,13 +7,21 @@ import YourSubmissions from "../_components/your-submissions";
 import RecentSubmissions from "../_components/recent-submissions";
 
 import { type PastRoundData } from "@/lib/types";
+import Image from "next/image";
+import { FALLBACK_IMAGE_URL } from "@/constants/data";
 
 export default function PastRoundPage({ data }: { data: PastRoundData }) {
   return (
     <>
       <section className="flex gap-x-2">
         <section className="hidden aspect-square w-1/2 p-2 md:block">
-          <div className="h-full w-full border bg-red-50" />
+          <Image
+            src={FALLBACK_IMAGE_URL}
+            alt="asdf"
+            className="h-full w-full rounded border-4 border-muted-foreground"
+            width={500}
+            height={500}
+          />
         </section>
         <section className="space-y-9 p-2 md:w-1/2">
           <div className="space-y-4">
