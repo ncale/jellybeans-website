@@ -2,6 +2,7 @@ import GraphQLClient from "./graphql-client";
 import {
   LatestRound,
   RawLatestRoundData,
+  RoundData,
   type RawRoundData,
   type RawSubmissionsData,
 } from "../types";
@@ -86,18 +87,61 @@ export default class ApiClient {
     this.client = new GraphQLClient(baseURL);
   }
 
+  /** Get round count */
+
   async getLatestRoundNumber(): Promise<LatestRound> {
     const query = GET_LATEST_ROUND_NUMBER();
     const data = await this.client.query<RawLatestRoundData>(query);
     return { id: Number(data.rounds.items[0].id) };
   }
 
-  async getRound(id: number): Promise<RawRoundData> {
+  /** Get round data */
+
+  #formatRound(data: RawRoundData): RoundData {
+    const rnd = data.round;
+    if (!rnd.isFinalized) {
+      return {
+        roundState: "active",
+        id: Number(rnd.id),
+        question: rnd.question.split("||")[0].trim(),
+        payoutDetails: rnd.question.split("||")[1].trim(),
+        submissionDeadline: BigInt(rnd.submissionDeadline),
+        potAmount: BigInt(rnd.potAmount),
+        feeAmount: BigInt(rnd.feeAmount),
+        initRoundTxnHash: rnd.initRoundTxnHash,
+        isFinalized: false,
+        correctAnswer: null,
+        winningAnswer: null,
+        winners: null,
+        setCorrectAnswerTxnHash: null,
+      };
+    } else {
+      return {
+        roundState: "past",
+        id: Number(rnd.id),
+        question: rnd.question.split("||")[0].trim(),
+        payoutDetails: rnd.question.split("||")[1].trim(),
+        submissionDeadline: BigInt(rnd.submissionDeadline),
+        potAmount: BigInt(rnd.potAmount),
+        feeAmount: BigInt(rnd.feeAmount),
+        initRoundTxnHash: rnd.initRoundTxnHash,
+        isFinalized: true,
+        correctAnswer: BigInt(rnd.correctAnswer),
+        winningAnswer: BigInt(rnd.winningAnswer),
+        winners: rnd.winners,
+        setCorrectAnswerTxnHash: rnd.setCorrectAnswerTxnHash,
+      };
+    }
+  }
+
+  async getRound(id: number): Promise<RoundData> {
     const query = GET_ROUND(id);
     const data = await this.client.query<RawRoundData | { round: null }>(query);
     if (data.round === null) throw new MissingDataError(`No round of id ${id} found`);
-    return data;
+    return this.#formatRound(data);
   }
+
+  /** Get submission data */
 
   async getUserRoundSubmissions(address: Address, round: number): Promise<RawSubmissionsData> {
     const query = GET_USER_SUBMISSIONS(address, round);

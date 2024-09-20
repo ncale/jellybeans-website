@@ -1,6 +1,6 @@
 "use client";
 
-import { numSchema, type RawRoundData, type RoundData } from "@/lib/types";
+import { numSchema } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import apiClient from "@/lib/api";
 
@@ -28,51 +28,12 @@ function ValidPage({ round }: { round: number }) {
   if (isLoading) return <LoadingPage />;
   if (!isSuccess) return <NotFound />;
 
-  const formattedData = formatData(data);
-
-  switch (formattedData.roundState) {
+  switch (data.roundState) {
     case "active":
-      return <ActiveRoundPage data={formattedData} />;
+      return <ActiveRoundPage data={data} />;
     case "past":
-      return <PastRoundPage data={formattedData} />;
+      return <PastRoundPage data={data} />;
     default:
       return <>alt</>;
-  }
-}
-
-function formatData(data: RawRoundData): RoundData {
-  const rnd = data.round;
-  if (!rnd.isFinalized) {
-    return {
-      roundState: "active",
-      id: Number(rnd.id),
-      question: rnd.question.split("||")[0].trim(),
-      payoutDetails: rnd.question.split("||")[1].trim(),
-      submissionDeadline: BigInt(rnd.submissionDeadline),
-      potAmount: BigInt(rnd.potAmount),
-      feeAmount: BigInt(rnd.feeAmount),
-      initRoundTxnHash: rnd.initRoundTxnHash,
-      isFinalized: false,
-      correctAnswer: null,
-      winningAnswer: null,
-      winners: null,
-      setCorrectAnswerTxnHash: null,
-    };
-  } else {
-    return {
-      roundState: "past",
-      id: Number(rnd.id),
-      question: rnd.question.split("||")[0].trim(),
-      payoutDetails: rnd.question.split("||")[1].trim(),
-      submissionDeadline: BigInt(rnd.submissionDeadline),
-      potAmount: BigInt(rnd.potAmount),
-      feeAmount: BigInt(rnd.feeAmount),
-      initRoundTxnHash: rnd.initRoundTxnHash,
-      isFinalized: true,
-      correctAnswer: BigInt(rnd.correctAnswer),
-      winningAnswer: BigInt(rnd.winningAnswer),
-      winners: rnd.winners,
-      setCorrectAnswerTxnHash: rnd.setCorrectAnswerTxnHash,
-    };
   }
 }
