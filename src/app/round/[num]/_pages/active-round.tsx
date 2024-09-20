@@ -4,46 +4,27 @@ import Details from "../_components/details";
 import Pagination from "../_components/pagination";
 import Submit from "../_components/submit";
 import YourSubmissions from "../_components/your-submissions";
-import RecentSubmissions from "../_components/recent-submissions";
 
 import { type ActiveRoundData } from "@/lib/types";
-import Image from "next/image";
-import { FALLBACK_IMAGE_URL } from "@/constants/data";
 
 export default function ActiveRoundPage({ data }: { data: ActiveRoundData }) {
   return (
     <>
-      <section className="flex gap-x-2">
-        <section className="hidden w-1/2 p-2 md:block">
-          <Image
-            src={FALLBACK_IMAGE_URL}
-            alt="asdf"
-            className="aspect-square w-full rounded border-4 border-muted-foreground"
-            width={500}
-            height={500}
-          />
-        </section>
-        <section className="p-2 md:w-1/2">
-          <div className="mb-9 space-y-4">
-            <Pagination currentPage={data.id} />
-            <Details
-              question={data.question}
-              payoutDetails={data.payoutDetails}
-              potAmount={data.potAmount}
-              submissionDeadline={data.submissionDeadline}
-            />
-          </div>
-          <Submit
-            round={data.id}
-            feeAmount={data.feeAmount}
-            submissionDeadline={data.submissionDeadline}
-          />
-          <YourSubmissions round={data.id} />
-        </section>
-      </section>
-      <section className="mt-12">
-        <RecentSubmissions round={data.id} />
-      </section>
+      <div className="mb-9 space-y-4">
+        <Pagination currentPage={data.id} />
+        <Details
+          question={data.question}
+          payoutDetails={data.payoutDetails}
+          potAmount={data.potAmount}
+          submissionDeadline={data.submissionDeadline}
+        />
+      </div>
+      <Submit
+        round={data.id}
+        feeAmount={data.feeAmount}
+        submissionDeadline={data.submissionDeadline}
+      />
+      <YourSubmissions round={data.id} />
     </>
   );
 }

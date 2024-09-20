@@ -10,16 +10,8 @@ import PastRoundPage from "./_pages/past-round";
 import ActiveRoundPage from "./_pages/active-round";
 
 export default function Page({ params }: { params: { num: string } }) {
-  const { success, data: round } = numSchema.safeParse(params.num);
+  const round = numSchema.parse(params.num);
 
-  if (success) {
-    return <ValidPage round={round} />;
-  } else {
-    return <NotFound />;
-  }
-}
-
-function ValidPage({ round }: { round: number }) {
   const { data, isLoading, isSuccess } = useQuery({
     queryKey: ["round", round],
     queryFn: () => apiClient.getRound(round),
