@@ -17,8 +17,8 @@ export default function RoundLayout({
 
   return (
     <>
-      <section className="flex gap-x-2">
-        <section className="hidden w-1/2 p-2 md:block">
+      <section className="flex flex-col gap-2 md:flex-row">
+        <section className="relative overflow-hidden p-2 md:h-fit md:w-1/2">
           <Image
             src={FALLBACK_IMAGE_URL}
             alt="this is a missing image placeholder"
