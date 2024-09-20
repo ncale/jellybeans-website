@@ -16,56 +16,6 @@ import { useQuery } from "@tanstack/react-query";
 import { ExternalLink } from "lucide-react";
 
 export default function RecentSubmissions({ round }: { round: number }) {
-  const { data, isLoading, isSuccess } = useQuery({
-    queryKey: ["recent-submissions", round],
-    queryFn: () => apiClient.getRecentSubmissions(round),
-  });
-
-  return (
-    <RecentSubmissionsTable>
-      {isLoading && (
-        <TableRow>
-          <TableCell colSpan={4} className="text-center">
-            Loading...
-          </TableCell>
-        </TableRow>
-      )}
-      {(!isSuccess || data.submissions.items.length === 0) && (
-        <TableRow>
-          <TableCell colSpan={4} className="text-center">
-            No entries yet!
-          </TableCell>
-        </TableRow>
-      )}
-      {isSuccess &&
-        data.submissions.items.map((sub) => (
-          <TableRow key={sub.txnHash}>
-            <TableCell className="py-1 text-center font-medium">
-              {
-                formatSeconds(BigInt(Math.floor(Date.now() / 1000)) - BigInt(sub.timestamp)).split(
-                  " ",
-                )[0]
-              }{" "}
-              ago
-            </TableCell>
-            <TableCell className="py-1 font-medium">{sub.submitter.slice(0, 7)}...</TableCell>
-            <TableCell className="py-1 text-center font-medium">{sub.entry}</TableCell>
-            <TableCell className="py-1">
-              <a
-                href={`${BLOCKSCOUT_BASE_URL}tx/${sub.txnHash}`}
-                target="_blank"
-                className="flex h-full w-full justify-center"
-              >
-                <ExternalLink className="h-3 w-3" />
-              </a>
-            </TableCell>
-          </TableRow>
-        ))}
-    </RecentSubmissionsTable>
-  );
-}
-
-function RecentSubmissionsTable({ children }: { children: React.ReactNode }) {
   return (
     <div className="space-y-1">
       <h3 className="font-medium">Recent Submissions</h3>
@@ -88,8 +38,56 @@ function RecentSubmissionsTable({ children }: { children: React.ReactNode }) {
             <TableHead className="w-16"></TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>{children}</TableBody>
+        <TableBody>
+          <RecentSubmissionsList round={round} />
+        </TableBody>
       </Table>
     </div>
   );
+}
+
+function RecentSubmissionsList({ round }: { round: number }) {
+  const { data, isLoading, isSuccess } = useQuery({
+    queryKey: ["recent-submissions", round],
+    queryFn: () => apiClient.getRecentSubmissions(round),
+  });
+
+  if (isLoading) {
+    return (
+      <TableRow>
+        <TableCell colSpan={4} className="text-center">
+          Loading...
+        </TableCell>
+      </TableRow>
+    );
+  }
+  if (!isSuccess) {
+    return (
+      <TableRow>
+        <TableCell colSpan={4} className="text-center">
+          No entries yet!
+        </TableCell>
+      </TableRow>
+    );
+  }
+
+  return data.submissions.items.map((sub) => (
+    <TableRow key={sub.txnHash}>
+      <TableCell className="py-1 text-center font-medium">
+        {formatSeconds(BigInt(Math.floor(Date.now() / 1000)) - BigInt(sub.timestamp)).split(" ")[0]}{" "}
+        ago
+      </TableCell>
+      <TableCell className="py-1 font-medium">{sub.submitter.slice(0, 7)}...</TableCell>
+      <TableCell className="py-1 text-center font-medium">{sub.entry}</TableCell>
+      <TableCell className="py-1">
+        <a
+          href={`${BLOCKSCOUT_BASE_URL}tx/${sub.txnHash}`}
+          target="_blank"
+          className="flex h-full w-full justify-center"
+        >
+          <ExternalLink className="h-3 w-3" />
+        </a>
+      </TableCell>
+    </TableRow>
+  ));
 }
