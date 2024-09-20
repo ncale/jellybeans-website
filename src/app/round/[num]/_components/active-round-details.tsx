@@ -1,11 +1,10 @@
 "use client";
 
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import InfoPopover from "@/components/info-popover";
 import { ROUND_RESOURCES_URL } from "@/constants/links";
 import { useCountdown, useCountdownPassed } from "@/lib/hooks";
 import { ActiveRoundData } from "@/lib/types";
 import { formatSeconds } from "@/lib/utils";
-import { Info } from "lucide-react";
 import { formatUnits } from "viem";
 
 export default function ActiveRoundDetails({ data }: { data: ActiveRoundData }) {
@@ -48,20 +47,4 @@ function CountdownText({ timestamp }: { timestamp: bigint }) {
   const { timeLeft } = useCountdown(timestamp);
   const timeString = formatSeconds(timeLeft);
   return timeString === "0s" ? "Closed" : timeString;
-}
-
-function InfoPopover({ text }: { text: string }) {
-  const lines = text.split("\n");
-  return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Info className="h-3 w-3 cursor-pointer" />
-      </PopoverTrigger>
-      <PopoverContent>
-        {lines.map((line, i) => (
-          <p key={i}>{line}</p>
-        ))}
-      </PopoverContent>
-    </Popover>
-  );
 }
