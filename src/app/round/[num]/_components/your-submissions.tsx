@@ -1,7 +1,7 @@
 "use client";
 
 import { Pill } from "@/components/ui/pill";
-import { BLOCKSCOUT_BASE_URL } from "@/constants/data";
+import { BLOCKSCOUT_BASE_URL } from "@/constants/links";
 import apiClient from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
 import { useAccount } from "wagmi";

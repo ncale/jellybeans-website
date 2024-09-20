@@ -1,7 +1,7 @@
 import CustomConnectButton from "./connect-button";
 import Link from "next/link";
 import { LibraryBig } from "lucide-react";
-import { DOCS_URL } from "@/constants/data";
+import { DOCS_URL } from "@/constants/links";
 import { cn } from "@/lib/utils";
 
 export default function Header() {

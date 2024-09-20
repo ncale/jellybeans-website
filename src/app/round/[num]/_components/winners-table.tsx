@@ -2,7 +2,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCaption, TableCell, TableRow } from "@/components/ui/table";
-import { BLOCKSCOUT_BASE_URL } from "@/constants/data";
+import { BLOCKSCOUT_BASE_URL } from "@/constants/links";
 import { PastRoundData } from "@/lib/types";
 import { ExternalLink } from "lucide-react";
 

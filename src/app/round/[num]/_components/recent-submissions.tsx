@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { BLOCKSCOUT_BASE_URL, DUNE_SUBMISSIONS_URL } from "@/constants/data";
+import { BLOCKSCOUT_BASE_URL, DUNE_SUBMISSIONS_URL } from "@/constants/links";
 import apiClient from "@/lib/api";
 import { formatSeconds } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";

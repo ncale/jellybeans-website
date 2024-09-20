@@ -1,6 +1,6 @@
 // import Link from "next/link";
 
-import { LICENSE_URL } from "@/constants/data";
+import { LICENSE_URL } from "@/constants/links";
 import { Scale } from "lucide-react";
 
 export default function Footer() {
