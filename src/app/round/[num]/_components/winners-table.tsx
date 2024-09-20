@@ -8,7 +8,7 @@ import { ExternalLink } from "lucide-react";
 
 export default function WinnersTable({ data }: { data: PastRoundData }) {
   return (
-    <div className="space-y-1">
+    <div className="mt-4 space-y-1">
       <h3 className="font-medium">Winning Entries</h3>
       <Card className="bg-background px-2 py-3">
         <CardContent>

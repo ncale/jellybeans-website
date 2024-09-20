@@ -1,6 +1,7 @@
 "use client";
 
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { ROUND_RESOURCES_URL } from "@/constants/links";
 import { useCountdown, useCountdownPassed } from "@/lib/hooks";
 import { ActiveRoundData } from "@/lib/types";
 import { formatSeconds } from "@/lib/utils";
@@ -30,6 +31,15 @@ export default function ActiveRoundDetails({ data }: { data: ActiveRoundData }) 
         </div>
       </div>
       <p className="text-xl font-semibold">{data.question}</p>
+      <p>
+        <a
+          href={ROUND_RESOURCES_URL}
+          target="_blank"
+          className="cursor-pointer text-sm font-semibold text-blue-700 hover:underline"
+        >
+          ( View historical data )
+        </a>
+      </p>
     </div>
   );
 }

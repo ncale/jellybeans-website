@@ -39,7 +39,7 @@ export default function Submit({
   submissionDeadline: bigint;
 }) {
   return (
-    <div className="mt-8 space-y-1">
+    <div className="mt-4 space-y-1">
       <h3 className="font-medium">Submit a Prediction</h3>
       <Card className="px-4 py-5">
         <CardContent>

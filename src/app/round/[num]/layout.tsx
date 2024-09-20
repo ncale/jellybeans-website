@@ -3,6 +3,7 @@ import Image from "next/image";
 import RecentSubmissions from "./_components/recent-submissions";
 import { numSchema } from "@/lib/types";
 import NotFound from "@/app/not-found";
+import Pagination from "./_components/pagination";
 
 export default function RoundLayout({
   children,
@@ -27,7 +28,10 @@ export default function RoundLayout({
             height={500}
           />
         </section>
-        <section className="space-y-9 p-2 md:w-1/2">{children}</section>
+        <section className="p-2 md:w-1/2">
+          <Pagination currentRound={round} />
+          {children}
+        </section>
       </section>
       <section className="mt-12">
         <RecentSubmissions round={round} />
