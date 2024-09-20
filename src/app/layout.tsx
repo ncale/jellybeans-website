@@ -11,7 +11,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 
 const moreSugarRegular = localFont({
-  src: "./fonts/MoreSugar-Regular.otf",
+  src: "./_fonts/MoreSugar-Regular.otf",
   variable: "--font-more-sugar",
   weight: "600",
 });
