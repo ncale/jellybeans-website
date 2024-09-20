@@ -24,14 +24,22 @@ export default function WinnersTable({ data }: { data: PastRoundData }) {
               </a>
             </TableCaption>
             <TableBody>
-              {data.winners.map((winner, i) => (
-                <TableRow key={i}>
-                  <TableCell className="font-medium">{winner.slice(0, 12)}...</TableCell>
-                  <TableCell className="text-right font-medium">
-                    {data.winningAnswer.toString()}
+              {data.winners.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={2} className="text-center font-medium">
+                    n/a
                   </TableCell>
                 </TableRow>
-              ))}
+              ) : (
+                data.winners.map((winner, i) => (
+                  <TableRow key={i}>
+                    <TableCell className="font-medium">{winner.slice(0, 12)}...</TableCell>
+                    <TableCell className="text-right font-medium">
+                      {data.winningAnswer.toString()}
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
             </TableBody>
           </Table>
         </CardContent>
