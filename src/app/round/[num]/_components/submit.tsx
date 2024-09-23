@@ -25,7 +25,7 @@ import { JellybeansAbi } from "@/constants/JellybeansAbi";
 import { jellybeansAddress } from "@/constants/contracts";
 import { useCountdownPassed } from "@/lib/hooks";
 import { useQueryClient } from "@tanstack/react-query";
-import { type RawSubmissionsData } from "@/lib/types";
+import { type ActiveRoundData, type RawSubmissionsData } from "@/lib/types";
 import { bigintDateNow } from "@/lib/utils";
 import InfoPopover from "@/components/info-popover";
 
@@ -95,6 +95,10 @@ function SubmitForm({
       });
       toast.message("Pending confirmation...");
 
+      queryClient.setQueryData(["round-data", round], (old: ActiveRoundData | undefined) => ({
+        ...old,
+        submissionCount: old ? old.submissionCount + 1 : 1,
+      }));
       queryClient.setQueryData(
         ["user-submissions", address, round],
         (old: RawSubmissionsData | undefined) => ({
