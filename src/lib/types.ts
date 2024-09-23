@@ -37,6 +37,7 @@ export type RawRoundData = {
     decimals: number;
     feeAmount: string; // -> bigint
     initRoundTxnHash: Hex;
+    submissionCount: number;
     isFinalized: boolean;
     correctAnswer: string; // -> bigint
     winningAnswer: string; // -> bigint
@@ -57,6 +58,7 @@ export type ActiveRoundData = {
   decimals: number;
   feeAmount: bigint;
   initRoundTxnHash: Hex;
+  submissionCount: number;
   isFinalized: false;
   correctAnswer: null;
   winningAnswer: null;
@@ -74,6 +76,7 @@ export type PastRoundData = {
   decimals: number;
   feeAmount: bigint;
   initRoundTxnHash: Hex;
+  submissionCount: number;
   isFinalized: true;
   correctAnswer: bigint;
   winningAnswer: bigint;

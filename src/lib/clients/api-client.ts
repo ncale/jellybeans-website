@@ -35,6 +35,7 @@ query CurrentRound {
 		decimals
     feeAmount
     initRoundTxnHash
+		submissionCount
     isFinalized
     correctAnswer
     winningAnswer
@@ -47,13 +48,13 @@ query CurrentRound {
 export const GET_USER_SUBMISSIONS = (address: Address, round: number) => `
 query UserSubmissions {
   submissions(
-    where: { submitter: "${address}", round: "${round}" }
+    where: { submitter: "${address}", roundId: "${round}" }
 		orderBy: "entry"
 		orderDirection: "asc"
   ) {
     items {
       entry
-      round
+      roundId
       txnHash
 			submitter
 			timestamp
@@ -65,14 +66,14 @@ query UserSubmissions {
 export const GET_RECENT_SUBMISSIONS = (round: number) => `
 query RecentSubmissions {
   submissions(
-    where: { round: "${round}" }
+    where: { roundId: "${round}" }
 		orderBy: "timestamp"
 		orderDirection: "desc"
 		limit: 7
   ) {
     items {
       entry
-      round
+      roundId
       txnHash
 			submitter
 			timestamp
@@ -100,17 +101,19 @@ export default class ApiClient {
 
   #formatRound(data: RawRoundData): RoundData {
     const rnd = data.round;
+    const questionParts = rnd.question.split("||");
     if (!rnd.isFinalized) {
       return {
         roundState: "active",
         id: Number(rnd.id),
-        question: rnd.question.split("||")[0].trim(),
-        payoutDetails: rnd.question.split("||")[1].trim(),
+        question: questionParts[0].trim(),
+        payoutDetails: questionParts.length > 1 ? questionParts[1].trim() : "",
         submissionDeadline: BigInt(rnd.submissionDeadline),
         potAmount: BigInt(rnd.potAmount),
         decimals: rnd.decimals,
         feeAmount: BigInt(rnd.feeAmount),
         initRoundTxnHash: rnd.initRoundTxnHash,
+        submissionCount: rnd.submissionCount,
         isFinalized: false,
         correctAnswer: null,
         winningAnswer: null,
@@ -121,13 +124,14 @@ export default class ApiClient {
       return {
         roundState: "past",
         id: Number(rnd.id),
-        question: rnd.question.split("||")[0].trim(),
-        payoutDetails: rnd.question.split("||")[1].trim(),
+        question: questionParts[0].trim(),
+        payoutDetails: questionParts.length > 1 ? questionParts[1].trim() : "",
         submissionDeadline: BigInt(rnd.submissionDeadline),
         potAmount: BigInt(rnd.potAmount),
         decimals: rnd.decimals,
         feeAmount: BigInt(rnd.feeAmount),
         initRoundTxnHash: rnd.initRoundTxnHash,
+        submissionCount: rnd.submissionCount,
         isFinalized: true,
         correctAnswer: BigInt(rnd.correctAnswer),
         winningAnswer: BigInt(rnd.winningAnswer),
