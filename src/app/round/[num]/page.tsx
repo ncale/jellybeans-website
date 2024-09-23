@@ -15,6 +15,9 @@ export default function Page({ params }: { params: { num: string } }) {
   const { data, isLoading, isSuccess } = useQuery({
     queryKey: ["round", round],
     queryFn: () => apiClient.getRound(round),
+    staleTime: 1000 * 60 * 5,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) return <LoadingPage />;

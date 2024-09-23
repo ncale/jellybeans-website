@@ -50,6 +50,9 @@ function RecentSubmissionsList({ round }: { round: number }) {
   const { data, isLoading, isSuccess } = useQuery({
     queryKey: ["recent-submissions", round],
     queryFn: () => apiClient.getRecentSubmissions(round),
+    staleTime: 1000 * 60 * 2,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) {

@@ -24,6 +24,9 @@ function MappedPills({ round }: { round: number }) {
     queryKey: ["user-submissions", address, round],
     queryFn: () => apiClient.getUserRoundSubmissions(address!, round),
     enabled: !!address,
+    staleTime: 1000 * 60 * 5,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) return <Pill variant="outline">Loading...</Pill>;

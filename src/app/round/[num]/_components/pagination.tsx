@@ -14,6 +14,8 @@ export default function Pagination({ currentRound }: { currentRound: number }) {
   } = useQuery({
     queryKey: ["latest-round"],
     queryFn: () => apiClient.getLatestRoundNumber(),
+    staleTime: Infinity,
+    gcTime: 1000 * 60 * 30,
   });
 
   const isPrevDisabled = currentRound <= 1;
