@@ -81,7 +81,9 @@ function RecentSubmissionsList({ round }: { round: number }) {
         ago
       </TableCell>
       <TableCell className="py-1 font-medium">{sub.submitter.slice(0, 7)}...</TableCell>
-      <TableCell className="py-1 text-center font-medium">{sub.entry}</TableCell>
+      <TableCell className="py-1 text-center font-medium">
+        {Number(sub.entry).toLocaleString()}
+      </TableCell>
       <TableCell className="py-1">
         <a
           href={`${BLOCKSCOUT_BASE_URL}tx/${sub.txnHash}`}

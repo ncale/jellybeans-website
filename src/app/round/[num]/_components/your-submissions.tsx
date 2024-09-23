@@ -34,7 +34,7 @@ function MappedPills({ round }: { round: number }) {
 
   return data.submissions.items.map((sub) => (
     <a href={`${BLOCKSCOUT_BASE_URL}tx/${sub.txnHash}/`} target="_blank" key={sub.txnHash}>
-      <Pill variant="outline">{sub.entry}</Pill>
+      <Pill variant="outline">{Number(sub.entry).toLocaleString()}</Pill>
     </a>
   ));
 }
