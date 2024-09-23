@@ -1,7 +1,10 @@
 export async function getTokenPrice(token: "OP" | "ETH"): Promise<MobulaResponse> {
+  const apiKey = process.env.MOBULA_API_KEY;
+  if (!apiKey) throw new Error("Missing mobula api key");
+
   const res = await fetch(`https://api.mobula.io/api/1/market/data?symbol=${token}`, {
     method: "GET",
-    headers: { "content-type": "application/json" },
+    headers: { "content-type": "application/json", Authorization: apiKey },
     next: { revalidate: 86400 },
   });
   if (!res.ok) {
