@@ -9,7 +9,7 @@ const queryClient = new QueryClient();
 
 const config = getDefaultConfig({
   appName: "Jellybeans",
-  projectId: "YOUR_PROJECT_ID",
+  projectId: process.env.NEXT_PUBLIC_WC_ID || "YOUR_PROJECT_ID",
   chains: [optimismSepolia],
   ssr: false,
 });
