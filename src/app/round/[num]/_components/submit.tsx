@@ -29,6 +29,13 @@ import { type ActiveRoundData, type RawSubmissionsData } from "@/lib/types";
 import { bigintDateNow } from "@/lib/utils";
 import InfoPopover from "@/components/info-popover";
 
+class NotConnectedError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "NotConnectedError";
+  }
+}
+
 export default function Submit({
   round,
   feeAmount,
@@ -77,7 +84,7 @@ function SubmitForm({
     defaultValues: { guess: 0 },
   });
 
-  const { address } = useAccount();
+  const { address, isConnected } = useAccount();
   const queryClient = useQueryClient();
 
   const isSubmissionPassed = useCountdownPassed(submissionDeadline);
@@ -86,6 +93,8 @@ function SubmitForm({
     console.log(values);
 
     try {
+      if (!isConnected) throw new NotConnectedError("Connect wallet to submit.");
+
       const hash = await writeContract(config, {
         abi: JellybeansAbi,
         address: jellybeansAddress,
@@ -141,7 +150,11 @@ function SubmitForm({
     } catch (error) {
       console.error(error);
 
-      toast.error("Oops! Something went wrong.");
+      if (error instanceof NotConnectedError) {
+        toast.error(error.message);
+      } else {
+        toast.error("Oops! Something went wrong.");
+      }
     }
   }
 
