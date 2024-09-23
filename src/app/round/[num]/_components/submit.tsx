@@ -28,6 +28,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { type ActiveRoundData, type RawSubmissionsData } from "@/lib/types";
 import { bigintDateNow } from "@/lib/utils";
 import InfoPopover from "@/components/info-popover";
+import { AmountUSD } from "@/components/amount-usd";
 
 class NotConnectedError extends Error {
   constructor(message: string) {
@@ -181,7 +182,8 @@ function SubmitForm({
                   </div>
                 </FormControl>
                 <FormDescription className="mt-1">
-                  * Submitting requires a {formatEther(feeAmount)} ETH fee
+                  * Submitting requires a {formatEther(feeAmount)} ETH{" "}
+                  <AmountUSD amount={Number(feeAmount) / 10 ** 18} token="eth" decimals={2} /> fee
                 </FormDescription>
                 <FormMessage />
               </FormItem>

@@ -1,11 +1,11 @@
 "use client";
 
+import { AmountUSD } from "@/components/amount-usd";
 import InfoPopover from "@/components/info-popover";
 import { ROUND_RESOURCES_URL } from "@/constants/links";
 import { useCountdown } from "@/lib/hooks";
 import { ActiveRoundData } from "@/lib/types";
 import { formatSeconds } from "@/lib/utils";
-import { useQuery } from "@tanstack/react-query";
 import { formatUnits } from "viem";
 
 export default function ActiveRoundDetails({ data }: { data: ActiveRoundData }) {
@@ -18,7 +18,7 @@ export default function ActiveRoundDetails({ data }: { data: ActiveRoundData }) 
         </h4>
         <p className="text-xl font-semibold">
           {formatUnits(data.potAmount, data.decimals)} OP{" "}
-          <AmountInUSDText amount={Number(data.potAmount) / 10 ** 18} />
+          <AmountUSD amount={Number(data.potAmount) / 10 ** 18} token="op" />
         </p>
       </div>
       <div className="flex">
@@ -51,29 +51,4 @@ function CountdownText({ timestamp }: { timestamp: bigint }) {
   const { timeLeft } = useCountdown(timestamp);
   const timeString = formatSeconds(timeLeft);
   return timeString === "0s" ? "Closed" : timeString;
-}
-
-function AmountInUSDText({ amount }: { amount: number }) {
-  const {
-    data: opPrice,
-    isLoading,
-    isSuccess,
-  } = useQuery({
-    queryKey: ["op-price"],
-    queryFn: (): Promise<{ price: number }> => fetch("/api/price").then((res) => res.json()),
-    staleTime: Infinity,
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    gcTime: Infinity,
-  });
-
-  if (isLoading) return <>Loading...</>;
-  if (!isSuccess) return <></>;
-
-  return (
-    <>
-      (~$
-      {(amount * opPrice.price).toFixed(0)})
-    </>
-  );
 }
