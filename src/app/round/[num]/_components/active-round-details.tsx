@@ -3,7 +3,6 @@
 import InfoPopover from "@/components/info-popover";
 import { ROUND_RESOURCES_URL } from "@/constants/links";
 import { useCountdown } from "@/lib/hooks";
-import { getOPPrice } from "@/lib/mobula";
 import { ActiveRoundData } from "@/lib/types";
 import { formatSeconds } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
@@ -61,7 +60,7 @@ function AmountInUSDText({ amount }: { amount: number }) {
     isSuccess,
   } = useQuery({
     queryKey: ["op-price"],
-    queryFn: () => getOPPrice(),
+    queryFn: (): Promise<{ price: number }> => fetch("/api/price").then((res) => res.json()),
     staleTime: Infinity,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
@@ -74,7 +73,7 @@ function AmountInUSDText({ amount }: { amount: number }) {
   return (
     <>
       (~$
-      {(amount * opPrice?.data.price).toFixed(0)})
+      {(amount * opPrice.price).toFixed(0)})
     </>
   );
 }
