@@ -18,7 +18,7 @@ export default function ActiveRoundDetails({ data }: { data: ActiveRoundData }) 
           {data.payoutDetails && <InfoPopover text={data.payoutDetails} />}
         </h4>
         <p className="text-xl font-semibold">
-          {formatUnits(data.potAmount, data.decimals)}{" "}
+          {formatUnits(data.potAmount, data.decimals)} OP{" "}
           <AmountInUSDText amount={Number(data.potAmount) / 10 ** 18} />
         </p>
       </div>
@@ -41,7 +41,7 @@ export default function ActiveRoundDetails({ data }: { data: ActiveRoundData }) 
           target="_blank"
           className="cursor-pointer text-sm font-semibold text-blue-700 hover:underline"
         >
-          ( View historical data )
+          ( hint )
         </a>
       </p>
     </div>
