@@ -7,7 +7,6 @@ import {
   FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Card, CardContent } from "@/components/ui/card";
@@ -151,7 +150,7 @@ function SubmitForm({
             name="guess"
             render={({ field }) => (
               <FormItem className="grow">
-                <FormLabel className="sr-only">Guess</FormLabel>
+                <legend className="sr-only">Guess</legend>
                 <FormControl>
                   <div className="flex h-9 w-full items-center gap-x-1.5 rounded-md border border-input bg-transparent py-1 pl-3 shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
                     <Lightbulb className="h-5 w-5 text-muted-foreground" />
