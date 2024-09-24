@@ -28,7 +28,7 @@ export default function PastRoundDetails({ data }: { data: PastRoundData }) {
           target="_blank"
           className="cursor-pointer text-sm font-semibold text-blue-700 hover:underline"
         >
-          ( hint )
+          ( see recent data )
         </a>
       </p>
     </div>

@@ -40,7 +40,7 @@ export default function ActiveRoundDetails({ data }: { data: ActiveRoundData }) 
           target="_blank"
           className="cursor-pointer text-sm font-semibold text-blue-700 hover:underline"
         >
-          ( hint )
+          ( see recent data )
         </a>
       </p>
     </div>
