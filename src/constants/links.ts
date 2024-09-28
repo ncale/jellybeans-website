@@ -13,6 +13,7 @@ export const ROUND_RESOURCES_URL =
 
 export const BLOCKSCOUT_BASE_URL = "https://optimism-sepolia.blockscout.com/";
 export const DUNE_SUBMISSIONS_URL = "https://dune.com/";
+export const NFT_METADATA_BASE_URL = "https://violet-select-limpet-794.mypinata.cloud/ipfs/";
 
 // Service URLs
 

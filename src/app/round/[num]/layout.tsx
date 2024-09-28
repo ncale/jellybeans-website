@@ -1,9 +1,10 @@
 import { FALLBACK_IMAGE_PATH } from "@/constants/links";
-import Image from "next/image";
 import RecentSubmissions from "./_components/recent-submissions";
 import { numSchema } from "@/lib/types";
 import NotFound from "@/app/not-found";
 import Pagination from "./_components/pagination";
+import { getNFTMetadataURL } from "@/lib/utils";
+import ImageWithFallback from "@/components/ui/image-with-fallback";
 
 export default function RoundLayout({
   children,
@@ -20,8 +21,9 @@ export default function RoundLayout({
     <>
       <section className="flex flex-col gap-2 md:flex-row">
         <section className="relative overflow-hidden p-2 md:h-fit md:w-1/2">
-          <Image
-            src={FALLBACK_IMAGE_PATH}
+          <ImageWithFallback
+            src={getNFTMetadataURL(round)}
+            fallbackSrc={FALLBACK_IMAGE_PATH}
             alt="this is a missing image placeholder"
             className="aspect-square w-full rounded border-4 border-muted-foreground"
             width={500}

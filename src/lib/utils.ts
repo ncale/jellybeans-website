@@ -1,3 +1,4 @@
+import { NFT_METADATA_BASE_URL } from "@/constants/links";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -27,4 +28,16 @@ export function formatSeconds(seconds: bigint): string {
 
 export function bigintDateNow() {
   return BigInt(Math.floor(Date.now() / 1000));
+}
+
+export function intToHexString(num: number): string {
+  // Convert the number to a hexadecimal string
+  const hexString = num.toString(16).toLowerCase();
+
+  // Pad the string with zeros to ensure it's 64 characters long
+  return hexString.padStart(64, "0");
+}
+
+export function getNFTMetadataURL(round: number): string {
+  return `${NFT_METADATA_BASE_URL}${intToHexString(round)}.json`;
 }
