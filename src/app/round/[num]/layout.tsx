@@ -19,6 +19,12 @@ export default function RoundLayout({
 
   return (
     <>
+      <section className="py-4">
+        <h2 className="mb-2 text-center text-2xl font-bold md:text-4xl">
+          Make Predictions, Win OP
+        </h2>
+        <Pagination currentRound={round} />
+      </section>
       <section className="flex flex-col gap-2 md:flex-row">
         <section className="relative overflow-hidden p-2 md:h-fit md:w-1/2">
           <ImageWithFallback
@@ -30,10 +36,7 @@ export default function RoundLayout({
             height={500}
           />
         </section>
-        <section className="p-2 md:w-1/2">
-          <Pagination currentRound={round} />
-          {children}
-        </section>
+        <section className="p-2 md:w-1/2">{children}</section>
       </section>
       <section className="mt-12">
         <RecentSubmissions round={round} />
