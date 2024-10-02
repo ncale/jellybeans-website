@@ -3,11 +3,19 @@ import Link from "next/link";
 import { LibraryBig } from "lucide-react";
 import { DOCS_URL } from "@/constants/links";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export default function Header() {
   return (
     <header className="flex items-end justify-between py-6">
-      <Link href={"/"}>
+      <Link href={"/"} className="flex items-end space-x-2 rtl:space-x-reverse">
+        <Image
+          src={"/logo.svg"}
+          alt="Jelly Beans Logo"
+          width={300}
+          height={300}
+          className="hidden h-10 w-10 -translate-y-1 -rotate-45 md:block"
+        />
         <h2 className="font-sugar text-3xl font-bold transition ease-in-out hover:text-foreground/50">
           Jelly Beans
         </h2>
