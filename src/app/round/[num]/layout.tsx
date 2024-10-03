@@ -25,8 +25,8 @@ export default function RoundLayout({
         </h2>
         <Pagination currentRound={round} />
       </section>
-      <section className="flex flex-col gap-2 md:flex-row">
-        <section className="relative overflow-hidden p-2 md:h-fit md:w-1/2">
+      <section className="flex flex-col gap-4 md:flex-row">
+        <section className="relative overflow-hidden md:h-fit md:w-1/2">
           <ImageWithFallback
             src={getNFTMetadataURL(round)}
             fallbackSrc={FALLBACK_IMAGE_PATH}
@@ -36,7 +36,7 @@ export default function RoundLayout({
             height={500}
           />
         </section>
-        <section className="p-2 md:w-1/2">{children}</section>
+        <section className="space-y-4 md:w-1/2">{children}</section>
       </section>
       <section className="mt-12">
         <RecentSubmissions round={round} />

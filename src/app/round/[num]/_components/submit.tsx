@@ -27,7 +27,6 @@ import { useCountdownPassed } from "@/lib/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import { type ActiveRoundData, type RawSubmissionsData } from "@/lib/types";
 import { bigintDateNow } from "@/lib/utils";
-import InfoPopover from "@/components/info-popover";
 import { AmountUSD } from "@/components/amount-usd";
 
 class NotConnectedError extends Error {
@@ -47,21 +46,11 @@ export default function Submit({
   submissionDeadline: bigint;
 }) {
   return (
-    <div className="mt-4 space-y-1">
-      <h3 className="flex items-baseline gap-x-1 font-medium">
-        <span>Submit a Prediction</span>
-        <InfoPopover
-          text={
-            "Winners are payed out per submission, meaning if you make 5 submissions and 3 win, you win 3 prizes\n- - -\nAlso! Receive 1 NFT per submission 🥳"
-          }
-        />
-      </h3>
-      <Card className="px-4 py-5">
-        <CardContent>
-          <SubmitForm round={round} feeAmount={feeAmount} submissionDeadline={submissionDeadline} />
-        </CardContent>
-      </Card>
-    </div>
+    <Card className="px-4 py-5">
+      <CardContent>
+        <SubmitForm round={round} feeAmount={feeAmount} submissionDeadline={submissionDeadline} />
+      </CardContent>
+    </Card>
   );
 }
 

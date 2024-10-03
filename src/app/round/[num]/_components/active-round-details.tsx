@@ -33,7 +33,6 @@ export default function ActiveRoundDetails({ data }: { data: ActiveRoundData }) 
           </p>
         </div>
       </div>
-      <p className="text-xl font-semibold">{data.question}</p>
       <p>
         <a
           href={ROUND_RESOURCES_URL}
