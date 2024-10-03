@@ -21,8 +21,8 @@ import { useForm } from "react-hook-form";
 
 import { writeContract, waitForTransactionReceipt } from "@wagmi/core";
 import { useAccount, useConfig } from "wagmi";
-import { JellybeansAbi } from "@/constants/JellybeansAbi";
-import { jellybeansAddress } from "@/constants/contracts";
+import { JellyBeansAbi } from "@/constants/JellyBeansAbi";
+import { JELLYBEANS_ADDRESS } from "@/constants/contracts";
 import { useCountdownPassed } from "@/lib/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import { type ActiveRoundData, type RawSubmissionsData } from "@/lib/types";
@@ -86,8 +86,8 @@ function SubmitForm({
       if (!isConnected) throw new NotConnectedError("Connect wallet to submit.");
 
       const hash = await writeContract(config, {
-        abi: JellybeansAbi,
-        address: jellybeansAddress,
+        abi: JellyBeansAbi,
+        address: JELLYBEANS_ADDRESS,
         functionName: "submitGuess",
         args: [BigInt(round), BigInt(values.guess)],
         value: feeAmount,
