@@ -33,6 +33,7 @@ query CurrentRound {
     submissionDeadline
     potAmount
 		decimals
+		numWinners
     feeAmount
     initRoundTxnHash
 		submissionCount
@@ -105,15 +106,13 @@ export default class ApiClient {
     if (!rnd.isFinalized) {
       return {
         roundState: "active",
+        ...rnd,
         id: Number(rnd.id),
         question: questionParts[0].trim(),
         payoutDetails: questionParts.length > 1 ? questionParts[1].trim() : "",
         submissionDeadline: BigInt(rnd.submissionDeadline),
         potAmount: BigInt(rnd.potAmount),
-        decimals: rnd.decimals,
         feeAmount: BigInt(rnd.feeAmount),
-        initRoundTxnHash: rnd.initRoundTxnHash,
-        submissionCount: rnd.submissionCount,
         isFinalized: false,
         correctAnswer: null,
         winningAnswer: null,
@@ -123,20 +122,16 @@ export default class ApiClient {
     } else {
       return {
         roundState: "past",
+        ...rnd,
         id: Number(rnd.id),
         question: questionParts[0].trim(),
         payoutDetails: questionParts.length > 1 ? questionParts[1].trim() : "",
         submissionDeadline: BigInt(rnd.submissionDeadline),
         potAmount: BigInt(rnd.potAmount),
-        decimals: rnd.decimals,
         feeAmount: BigInt(rnd.feeAmount),
-        initRoundTxnHash: rnd.initRoundTxnHash,
-        submissionCount: rnd.submissionCount,
         isFinalized: true,
         correctAnswer: BigInt(rnd.correctAnswer),
         winningAnswer: BigInt(rnd.winningAnswer),
-        winners: rnd.winners,
-        setCorrectAnswerTxnHash: rnd.setCorrectAnswerTxnHash,
       };
     }
   }

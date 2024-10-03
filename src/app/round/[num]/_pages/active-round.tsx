@@ -55,7 +55,7 @@ export default function ActiveRoundPage({ data }: { data: ActiveRoundData }) {
       <div className="flex">
         <div className="min-w-48">
           <SectionHeader text="Winners" light />
-          <p className="text-xl font-semibold">{100}</p>
+          <p className="text-xl font-semibold">{data.numWinners}</p>
         </div>
 
         <div>

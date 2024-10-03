@@ -35,6 +35,7 @@ export type RawRoundData = {
     submissionDeadline: string; // -> bigint
     potAmount: string; // -> bigint
     decimals: number;
+    numWinners: number;
     feeAmount: string; // -> bigint
     initRoundTxnHash: Hex;
     submissionCount: number;
@@ -56,6 +57,7 @@ export type ActiveRoundData = {
   submissionDeadline: bigint;
   potAmount: bigint;
   decimals: number;
+  numWinners: number;
   feeAmount: bigint;
   initRoundTxnHash: Hex;
   submissionCount: number;
@@ -74,6 +76,7 @@ export type PastRoundData = {
   submissionDeadline: bigint;
   potAmount: bigint;
   decimals: number;
+  numWinners: number;
   feeAmount: bigint;
   initRoundTxnHash: Hex;
   submissionCount: number;
