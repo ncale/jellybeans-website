@@ -1,0 +1,66 @@
+import { BASE_URL } from "@/constants/links";
+
+type Tokens = {
+  id: bigint;
+  name: string;
+  description: string;
+  collection: string;
+  round: number;
+  image: string;
+  traits: [{ trait_type: "name"; value: string }, { trait_type: "project"; value: string }];
+  artist: string;
+  blockchain: string;
+  token_standard: string;
+  external_url: string;
+};
+
+export const tokens: Tokens[] = [
+  {
+    id: BigInt(1),
+    name: "Jelly Beans Round 1",
+    description: "This token represents a prediction in Round 1 of Jelly Beans",
+    collection: "jellybeans",
+    round: 1,
+    image: `https://${BASE_URL}/nft-images/1.png`,
+    traits: [
+      { trait_type: "name", value: "Remy" },
+      { trait_type: "project", value: "ENS" },
+    ],
+    artist: "Onchain Clarity Co.",
+    blockchain: "OP Mainnet",
+    token_standard: "ERC-1155",
+    external_url: "jellybeans.wtf/1",
+  },
+  {
+    id: BigInt(2),
+    name: "Jelly Beans Round 2",
+    description: "This token represents a prediction in Round 2 of Jelly Beans",
+    collection: "jellybeans",
+    round: 2,
+    image: `https://${BASE_URL}/nft-images/1.png`,
+    traits: [
+      { trait_type: "name", value: "Mabel" },
+      { trait_type: "project", value: "Farcaster" },
+    ],
+    artist: "Onchain Clarity Co",
+    blockchain: "OP Mainnet",
+    token_standard: "ERC-1155",
+    external_url: "jellybeans.wtf/2",
+  },
+  {
+    id: BigInt(3),
+    name: "Jelly Beans Round 3",
+    description: "This token represents a prediction in Round 3 of Jelly Beans",
+    collection: "jellybeans",
+    round: 3,
+    image: `https://${BASE_URL}/nft-images/1.png`,
+    traits: [
+      { trait_type: "name", value: "Wanda" },
+      { trait_type: "project", value: "Optimism" },
+    ],
+    artist: "Onchain Clarity Co",
+    blockchain: "OP Mainnet",
+    token_standard: "ERC-1155",
+    external_url: "jellybeans.wtf/3",
+  },
+];
