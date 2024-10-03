@@ -3,7 +3,7 @@ import RecentSubmissions from "./_components/recent-submissions";
 import { numSchema } from "@/lib/types";
 import NotFound from "@/app/not-found";
 import Pagination from "./_components/pagination";
-import { getNFTMetadataURL } from "@/lib/utils";
+import { getTokenImagePath } from "@/lib/utils";
 import ImageWithFallback from "@/components/ui/image-with-fallback";
 
 export default function RoundLayout({
@@ -28,9 +28,9 @@ export default function RoundLayout({
       <section className="flex flex-col gap-4 md:flex-row">
         <section className="relative overflow-hidden md:h-fit md:w-1/2">
           <ImageWithFallback
-            src={getNFTMetadataURL(round)}
+            src={getTokenImagePath(round)}
             fallbackSrc={FALLBACK_IMAGE_PATH}
-            alt="this is a missing image placeholder"
+            alt={`Round ${round} token image`}
             className="aspect-square w-full rounded border-4 border-muted-foreground"
             width={500}
             height={500}

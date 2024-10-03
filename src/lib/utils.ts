@@ -1,4 +1,3 @@
-import { NFT_METADATA_BASE_URL } from "@/constants/links";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -38,6 +37,10 @@ export function intToHexString(num: number): string {
   return hexString.padStart(64, "0");
 }
 
-export function getNFTMetadataURL(round: number): string {
-  return `${NFT_METADATA_BASE_URL}${intToHexString(round)}.json`;
+export function getTokenMetadataPath(id: number): string {
+  return `/api/metadata/${id}.png`;
+}
+
+export function getTokenImagePath(id: number): string {
+  return `/token-images/${id}.png`;
 }
