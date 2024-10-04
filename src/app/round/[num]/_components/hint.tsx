@@ -10,7 +10,7 @@ export default function Hint({ hint }: { hint: string }) {
   return (
     <>
       <span
-        className="flex items-center gap-x-1 text-sm font-medium"
+        className="flex w-fit cursor-pointer items-center gap-x-1 text-sm font-medium"
         onClick={() => setIsOpen(!isOpen)}
       >
         <span>Hint</span>
