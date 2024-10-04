@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { BLOCKSCOUT_BASE_URL, DUNE_SUBMISSIONS_URL } from "@/constants/links";
+import { BLOCKSCOUT_BASE_URL, HINTS_URL } from "@/constants/links";
 import apiClient from "@/lib/api";
 import { formatSeconds } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
@@ -22,7 +22,7 @@ export default function RecentSubmissions({ round }: { round: number }) {
       <Table className="text-muted-foreground">
         <TableCaption>
           <a
-            href={DUNE_SUBMISSIONS_URL}
+            href={HINTS_URL}
             target="_blank"
             className="mx-auto flex w-fit items-center gap-x-1.5 hover:underline"
           >
