@@ -21,7 +21,7 @@ export const tokens: Tokens[] = [
     description: "This token represents a prediction in Round 1 of Jelly Beans",
     collection: "jellybeans",
     round: 1,
-    image: `https://${BASE_URL}/nft-images/1.png`,
+    image: `${BASE_URL}token-images/1.png`,
     traits: [
       { trait_type: "name", value: "Remy" },
       { trait_type: "project", value: "ENS" },
@@ -29,7 +29,7 @@ export const tokens: Tokens[] = [
     artist: "Onchain Clarity Co.",
     blockchain: "OP Mainnet",
     token_standard: "ERC-1155",
-    external_url: "jellybeans.wtf/1",
+    external_url: `${BASE_URL}round/1`,
   },
   {
     id: BigInt(2),
@@ -37,7 +37,7 @@ export const tokens: Tokens[] = [
     description: "This token represents a prediction in Round 2 of Jelly Beans",
     collection: "jellybeans",
     round: 2,
-    image: `https://${BASE_URL}/nft-images/1.png`,
+    image: `${BASE_URL}token-images/1.png`,
     traits: [
       { trait_type: "name", value: "Mabel" },
       { trait_type: "project", value: "Farcaster" },
@@ -45,7 +45,7 @@ export const tokens: Tokens[] = [
     artist: "Onchain Clarity Co",
     blockchain: "OP Mainnet",
     token_standard: "ERC-1155",
-    external_url: "jellybeans.wtf/2",
+    external_url: `${BASE_URL}round/2`,
   },
   {
     id: BigInt(3),
@@ -53,7 +53,7 @@ export const tokens: Tokens[] = [
     description: "This token represents a prediction in Round 3 of Jelly Beans",
     collection: "jellybeans",
     round: 3,
-    image: `https://${BASE_URL}/nft-images/1.png`,
+    image: `${BASE_URL}token-images/1.png`,
     traits: [
       { trait_type: "name", value: "Wanda" },
       { trait_type: "project", value: "Optimism" },
@@ -61,6 +61,6 @@ export const tokens: Tokens[] = [
     artist: "Onchain Clarity Co",
     blockchain: "OP Mainnet",
     token_standard: "ERC-1155",
-    external_url: "jellybeans.wtf/3",
+    external_url: `${BASE_URL}round/3`,
   },
 ];
