@@ -3,12 +3,12 @@
 import SectionHeader from "../_components/section-header";
 import Submit from "../_components/submit";
 import YourSubmissions from "../_components/your-submissions";
-
-import { type ActiveRoundData } from "@/lib/types";
 import CountdownText from "../_components/countdown-text";
-import { formatUnits } from "viem";
-import { AmountUSD } from "@/components/amount-usd";
 import Hint from "../_components/hint";
+import { AmountUSD } from "@/components/amount-usd";
+
+import { formatUnits } from "viem";
+import { type ActiveRoundData } from "@/lib/types";
 
 export default function ActiveRoundPage({ data }: { data: ActiveRoundData }) {
   return (
