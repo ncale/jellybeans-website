@@ -111,6 +111,7 @@ function Submitter({ address }: { address: string }) {
   });
   if (isLoading) return <>{address.slice(0, 7)}...</>;
   if (!isSuccess) return <>{address.slice(0, 7)}...</>;
+  if (!data.ens_primary) return <>{address.slice(0, 7)}...</>;
   return <>{data.ens_primary}</>;
 }
 
