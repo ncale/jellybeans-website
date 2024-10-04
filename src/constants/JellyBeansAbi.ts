@@ -76,18 +76,8 @@ export const JellyBeansAbi = [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "operator",
-        type: "address",
-      },
+      { indexed: true, internalType: "address", name: "account", type: "address" },
+      { indexed: true, internalType: "address", name: "operator", type: "address" },
       { indexed: false, internalType: "bool", name: "approved", type: "bool" },
     ],
     name: "ApprovalForAll",
@@ -96,18 +86,8 @@ export const JellyBeansAbi = [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: false,
-        internalType: "address",
-        name: "owner",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
+      { indexed: false, internalType: "address", name: "owner", type: "address" },
+      { indexed: false, internalType: "uint256", name: "amount", type: "uint256" },
     ],
     name: "FeesWithdrawn",
     type: "event",
@@ -115,38 +95,16 @@ export const JellyBeansAbi = [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "roundId",
-        type: "uint256",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "submitter",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "guess",
-        type: "uint256",
-      },
+      { indexed: true, internalType: "uint256", name: "roundId", type: "uint256" },
+      { indexed: true, internalType: "address", name: "submitter", type: "address" },
+      { indexed: false, internalType: "uint256", name: "guess", type: "uint256" },
     ],
     name: "GuessSubmitted",
     type: "event",
   },
   {
     anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-    ],
+    inputs: [{ indexed: false, internalType: "address", name: "account", type: "address" }],
     name: "Paused",
     type: "event",
   },
@@ -154,18 +112,8 @@ export const JellyBeansAbi = [
     anonymous: false,
     inputs: [
       { indexed: true, internalType: "bytes32", name: "role", type: "bytes32" },
-      {
-        indexed: true,
-        internalType: "bytes32",
-        name: "previousAdminRole",
-        type: "bytes32",
-      },
-      {
-        indexed: true,
-        internalType: "bytes32",
-        name: "newAdminRole",
-        type: "bytes32",
-      },
+      { indexed: true, internalType: "bytes32", name: "previousAdminRole", type: "bytes32" },
+      { indexed: true, internalType: "bytes32", name: "newAdminRole", type: "bytes32" },
     ],
     name: "RoleAdminChanged",
     type: "event",
@@ -174,18 +122,8 @@ export const JellyBeansAbi = [
     anonymous: false,
     inputs: [
       { indexed: true, internalType: "bytes32", name: "role", type: "bytes32" },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "sender",
-        type: "address",
-      },
+      { indexed: true, internalType: "address", name: "account", type: "address" },
+      { indexed: true, internalType: "address", name: "sender", type: "address" },
     ],
     name: "RoleGranted",
     type: "event",
@@ -194,18 +132,8 @@ export const JellyBeansAbi = [
     anonymous: false,
     inputs: [
       { indexed: true, internalType: "bytes32", name: "role", type: "bytes32" },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "sender",
-        type: "address",
-      },
+      { indexed: true, internalType: "address", name: "account", type: "address" },
+      { indexed: true, internalType: "address", name: "sender", type: "address" },
     ],
     name: "RoleRevoked",
     type: "event",
@@ -213,48 +141,13 @@ export const JellyBeansAbi = [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "roundId",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "string",
-        name: "question",
-        type: "string",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "submissionDeadline",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "potTokenAddress",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "potAmount",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "numWinners",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "feeAmount",
-        type: "uint256",
-      },
+      { indexed: true, internalType: "uint256", name: "roundId", type: "uint256" },
+      { indexed: false, internalType: "string", name: "question", type: "string" },
+      { indexed: false, internalType: "uint256", name: "submissionDeadline", type: "uint256" },
+      { indexed: false, internalType: "address", name: "potTokenAddress", type: "address" },
+      { indexed: false, internalType: "uint256", name: "potAmount", type: "uint256" },
+      { indexed: false, internalType: "uint256", name: "numWinners", type: "uint256" },
+      { indexed: false, internalType: "uint256", name: "feeAmount", type: "uint256" },
     ],
     name: "RoundInitialized",
     type: "event",
@@ -262,26 +155,11 @@ export const JellyBeansAbi = [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "operator",
-        type: "address",
-      },
+      { indexed: true, internalType: "address", name: "operator", type: "address" },
       { indexed: true, internalType: "address", name: "from", type: "address" },
       { indexed: true, internalType: "address", name: "to", type: "address" },
-      {
-        indexed: false,
-        internalType: "uint256[]",
-        name: "ids",
-        type: "uint256[]",
-      },
-      {
-        indexed: false,
-        internalType: "uint256[]",
-        name: "values",
-        type: "uint256[]",
-      },
+      { indexed: false, internalType: "uint256[]", name: "ids", type: "uint256[]" },
+      { indexed: false, internalType: "uint256[]", name: "values", type: "uint256[]" },
     ],
     name: "TransferBatch",
     type: "event",
@@ -289,21 +167,11 @@ export const JellyBeansAbi = [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "operator",
-        type: "address",
-      },
+      { indexed: true, internalType: "address", name: "operator", type: "address" },
       { indexed: true, internalType: "address", name: "from", type: "address" },
       { indexed: true, internalType: "address", name: "to", type: "address" },
       { indexed: false, internalType: "uint256", name: "id", type: "uint256" },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "value",
-        type: "uint256",
-      },
+      { indexed: false, internalType: "uint256", name: "value", type: "uint256" },
     ],
     name: "TransferSingle",
     type: "event",
@@ -319,26 +187,14 @@ export const JellyBeansAbi = [
   },
   {
     anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-    ],
+    inputs: [{ indexed: false, internalType: "address", name: "account", type: "address" }],
     name: "Unpaused",
     type: "event",
   },
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "roundId",
-        type: "uint256",
-      },
+      { indexed: true, internalType: "uint256", name: "roundId", type: "uint256" },
       {
         components: [
           { internalType: "address", name: "submitter", type: "address" },
@@ -349,12 +205,7 @@ export const JellyBeansAbi = [
         name: "winners",
         type: "tuple[]",
       },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "correctAnswer",
-        type: "uint256",
-      },
+      { indexed: false, internalType: "uint256", name: "correctAnswer", type: "uint256" },
     ],
     name: "WinnerSelected",
     type: "event",
@@ -460,11 +311,12 @@ export const JellyBeansAbi = [
   },
   {
     inputs: [],
-    name: "pause",
-    outputs: [],
-    stateMutability: "nonpayable",
+    name: "name",
+    outputs: [{ internalType: "string", name: "", type: "string" }],
+    stateMutability: "view",
     type: "function",
   },
+  { inputs: [], name: "pause", outputs: [], stateMutability: "nonpayable", type: "function" },
   {
     inputs: [],
     name: "paused",
@@ -605,13 +457,7 @@ export const JellyBeansAbi = [
     stateMutability: "view",
     type: "function",
   },
-  {
-    inputs: [],
-    name: "unpause",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
+  { inputs: [], name: "unpause", outputs: [], stateMutability: "nonpayable", type: "function" },
   {
     inputs: [{ internalType: "uint256", name: "_id", type: "uint256" }],
     name: "uri",
