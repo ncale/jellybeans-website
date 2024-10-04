@@ -2,7 +2,7 @@
 
 import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
-import { optimismSepolia } from "wagmi/chains";
+import { optimism } from "wagmi/chains";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
@@ -10,8 +10,8 @@ const queryClient = new QueryClient();
 const config = getDefaultConfig({
   appName: "Jellybeans",
   projectId: process.env.NEXT_PUBLIC_WC_ID || "YOUR_PROJECT_ID",
-  chains: [optimismSepolia],
-  ssr: false,
+  chains: [optimism],
+  ssr: true,
 });
 
 export default function Providers({ children }: { children: React.ReactNode }) {
