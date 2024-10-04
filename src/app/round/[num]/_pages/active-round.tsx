@@ -14,16 +14,19 @@ export default function ActiveRoundPage({ data }: { data: ActiveRoundData }) {
   return (
     <>
       <div>
-        <SectionHeader text="Question" />
+        <SectionHeader
+          text="Question"
+          // infoText={"The data is evaluated according to ithout going over"}
+        />
         <p className="text-xl font-semibold">{data.question}</p>
       </div>
 
       <div className="space-y-1">
         <SectionHeader
           text="Submit a Prediction"
-          infoText={
-            "Winners are payed out per submission, meaning if you make 5 submissions and 3 win, you win 3 prizes\n- - -\nAlso! Receive 1 NFT per submission 🥳"
-          }
+          // infoText={
+          //   "Winners are payed out per submission, meaning if you make 5 submissions and 3 win, you win 3 prizes\n- - -\nAlso! Receive 1 NFT per submission 🥳"
+          // }
         />
         <Submit
           round={data.id}
@@ -36,7 +39,7 @@ export default function ActiveRoundPage({ data }: { data: ActiveRoundData }) {
 
       <div className="flex">
         <div className="min-w-48">
-          <SectionHeader text="Pot" infoText={data.payoutDetails} light />
+          <SectionHeader text="Pot" light />
           <p className="text-xl font-semibold">
             {formatUnits(data.potAmount, data.decimals)} OP{" "}
             <AmountUSD amount={Number(data.potAmount) / 10 ** 18} token="op" />
@@ -53,7 +56,7 @@ export default function ActiveRoundPage({ data }: { data: ActiveRoundData }) {
 
       <div className="flex">
         <div className="min-w-48">
-          <SectionHeader text="Winners" light />
+          <SectionHeader text="Winners" infoText={data.payoutDetails} light />
           <p className="text-xl font-semibold">{data.numWinners}</p>
         </div>
 
@@ -63,9 +66,7 @@ export default function ActiveRoundPage({ data }: { data: ActiveRoundData }) {
         </div>
       </div>
 
-      <br />
-
-      <div>
+      <div className="space-y-1">
         <SectionHeader text="Your Submissions" />
         <YourSubmissions round={data.id} />
       </div>
