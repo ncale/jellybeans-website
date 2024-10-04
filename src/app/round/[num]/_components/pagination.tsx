@@ -22,9 +22,9 @@ export default function Pagination({ currentRound }: { currentRound: number }) {
   const isNextDisabled = isLoading || !isSuccess || currentRound >= latestRound.id;
 
   return (
-    <div className="mb-4 flex items-center justify-center gap-x-1.5 text-sm">
+    <div className="mb-4 flex items-center justify-center gap-x-1.5">
       <Button
-        variant="outline"
+        variant="secondary"
         size="icon"
         className="h-7 w-7 rounded-full"
         disabled={isPrevDisabled}
@@ -33,8 +33,9 @@ export default function Pagination({ currentRound }: { currentRound: number }) {
           <ChevronsLeft className="h-4 w-4" />
         </Link>
       </Button>
+
       <Button
-        variant="outline"
+        variant="secondary"
         size="icon"
         className="h-7 w-7 rounded-full"
         disabled={isPrevDisabled}
@@ -43,9 +44,11 @@ export default function Pagination({ currentRound }: { currentRound: number }) {
           <ChevronLeft className="h-4 w-4" />
         </Link>
       </Button>
-      <span className="text-muted-foreground">Round {currentRound}</span>
+
+      <span className="px-1 font-semibold text-muted-foreground">Round {currentRound}</span>
+
       <Button
-        variant="outline"
+        variant="secondary"
         size="icon"
         className="h-7 w-7 rounded-full"
         disabled={isNextDisabled}
@@ -54,8 +57,9 @@ export default function Pagination({ currentRound }: { currentRound: number }) {
           <ChevronRight className="h-4 w-4" />
         </Link>
       </Button>
+
       <Button
-        variant="outline"
+        variant="secondary"
         size="icon"
         className="h-7 w-7 rounded-full"
         disabled={isNextDisabled}

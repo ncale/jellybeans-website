@@ -19,13 +19,13 @@ export default function RoundLayout({
 
   return (
     <>
-      <section className="py-4">
+      <section className="py-6">
         <h2 className="mb-2 text-center text-2xl font-bold md:text-4xl">
           Make Predictions, Win OP
         </h2>
         <Pagination currentRound={round} />
       </section>
-      <section className="flex flex-col gap-4 md:flex-row">
+      <section className="flex flex-col gap-8 md:flex-row md:gap-4">
         <section className="relative overflow-hidden md:h-fit md:w-1/2">
           <ImageWithFallback
             src={getTokenImagePath(round)}
