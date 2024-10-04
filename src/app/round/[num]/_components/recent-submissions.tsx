@@ -80,7 +80,9 @@ function RecentSubmissionsList({ round }: { round: number }) {
         {formatSeconds(BigInt(Math.floor(Date.now() / 1000)) - BigInt(sub.timestamp)).split(" ")[0]}{" "}
         ago
       </TableCell>
-      <TableCell className="py-1 font-medium">{sub.submitter.slice(0, 7)}...</TableCell>
+      <TableCell className="py-1 font-medium">
+        <Submitter address={sub.submitter} />
+      </TableCell>
       <TableCell className="py-1 text-center font-medium">
         {Number(sub.entry).toLocaleString()}
       </TableCell>
@@ -96,3 +98,29 @@ function RecentSubmissionsList({ round }: { round: number }) {
     </TableRow>
   ));
 }
+
+function Submitter({ address }: { address: string }) {
+  const { data, isLoading, isSuccess } = useQuery<EnsData>({
+    queryKey: ["ens-lookup", address],
+    queryFn: () => fetch(`https://api.ensdata.net/${address}`).then((res) => res.json()),
+    staleTime: Infinity,
+    gcTime: 1000 * 60 * 60,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+  });
+  if (isLoading) return <>{address.slice(0, 7)}...</>;
+  if (!isSuccess) return <>{address.slice(0, 7)}...</>;
+  return <>{data.ens_primary}</>;
+}
+
+type EnsData = {
+  address: string;
+  contentHash: null;
+  ens: string;
+  ens_primary: string;
+  resolverAddress: string;
+  wallets: {
+    eth: string;
+  };
+};
