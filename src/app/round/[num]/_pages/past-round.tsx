@@ -24,7 +24,7 @@ export default function PastRoundPage({ data }: { data: PastRoundData }) {
           <SectionHeader text="Pot" />
           <p className="text-xl font-semibold">
             {formatUnits(data.potAmount, data.decimals)}
-            <AmountUSD amount={Number(data.potAmount) / 10 ** 18} token="op" />
+            (<AmountUSD amount={Number(data.potAmount) / 10 ** 18} token="op" />)
           </p>
         </div>
 

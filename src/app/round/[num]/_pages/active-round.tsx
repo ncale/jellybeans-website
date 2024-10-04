@@ -41,8 +41,8 @@ export default function ActiveRoundPage({ data }: { data: ActiveRoundData }) {
         <div className="min-w-48">
           <SectionHeader text="Pot" light />
           <p className="text-xl font-semibold">
-            {formatUnits(data.potAmount, data.decimals)} OP{" "}
-            <AmountUSD amount={Number(data.potAmount) / 10 ** 18} token="op" />
+            {formatUnits(data.potAmount, data.decimals)} OP (
+            <AmountUSD amount={Number(data.potAmount) / 10 ** 18} token="op" />)
           </p>
         </div>
 

@@ -171,8 +171,8 @@ function SubmitForm({
                   </div>
                 </FormControl>
                 <FormDescription className="mt-1">
-                  * Submitting requires a {formatEther(feeAmount)} ETH{" "}
-                  <AmountUSD amount={Number(feeAmount) / 10 ** 18} token="eth" decimals={2} /> fee
+                  * Submitting requires a {formatEther(feeAmount)} ETH (
+                  <AmountUSD amount={Number(feeAmount) / 10 ** 18} token="eth" decimals={2} />) fee
                 </FormDescription>
                 <FormMessage />
               </FormItem>

@@ -24,8 +24,8 @@ export function AmountUSD({
 
   return (
     <>
-      (~$
-      {(amount * data.price).toFixed(decimals)})
+      ~$
+      {(amount * data.price).toFixed(decimals)}
     </>
   );
 }
