@@ -1,6 +1,6 @@
 "use client";
 
-import { ROUND_RESOURCES_URL } from "@/constants/links";
+import { HINTS_URL } from "@/constants/links";
 import { type PastRoundData } from "@/lib/types";
 import { formatUnits } from "viem";
 
@@ -24,7 +24,7 @@ export default function PastRoundDetails({ data }: { data: PastRoundData }) {
       <p className="text-xl font-semibold">{data.question}</p>
       <p>
         <a
-          href={ROUND_RESOURCES_URL}
+          href={HINTS_URL}
           target="_blank"
           className="cursor-pointer text-sm font-semibold text-blue-700 hover:underline"
         >

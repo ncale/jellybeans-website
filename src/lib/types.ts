@@ -54,6 +54,7 @@ export type ActiveRoundData = {
   id: number;
   question: string;
   payoutDetails?: string;
+  hint?: string;
   submissionDeadline: bigint;
   potAmount: bigint;
   decimals: number;
@@ -73,6 +74,7 @@ export type PastRoundData = {
   id: number;
   question: string;
   payoutDetails?: string;
+  hint?: string;
   submissionDeadline: bigint;
   potAmount: bigint;
   decimals: number;

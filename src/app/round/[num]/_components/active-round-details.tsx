@@ -2,7 +2,7 @@
 
 import { AmountUSD } from "@/components/amount-usd";
 import InfoPopover from "@/components/info-popover";
-import { ROUND_RESOURCES_URL } from "@/constants/links";
+import { HINTS_URL } from "@/constants/links";
 import { useCountdown } from "@/lib/hooks";
 import { ActiveRoundData } from "@/lib/types";
 import { formatSeconds } from "@/lib/utils";
@@ -35,7 +35,7 @@ export default function ActiveRoundDetails({ data }: { data: ActiveRoundData }) 
       </div>
       <p>
         <a
-          href={ROUND_RESOURCES_URL}
+          href={HINTS_URL}
           target="_blank"
           className="cursor-pointer text-sm font-semibold text-blue-700 hover:underline"
         >

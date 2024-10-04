@@ -6,8 +6,8 @@ export const DOCS_URL =
   "https://important-passbook-843.notion.site/Jelly-Beans-0bc435fff7e6489a95f49432dbed1fda/";
 export const NAMES_URL = "https://names.wannabet.cc/";
 export const LICENSE_URL = "https://github.com/ncale/jellybeans-website/blob/main/LICENSE/";
-export const ROUND_RESOURCES_URL =
-  "https://important-passbook-843.notion.site/Helpful-Historical-Data-107d35a6eafd80ecb4f7fb86193e2b58";
+export const HINTS_URL =
+  "https://important-passbook-843.notion.site/Data-References-114d35a6eafd806686aefa534ca3a060";
 
 // Base URLs (for linking to txns or dashboards)
 

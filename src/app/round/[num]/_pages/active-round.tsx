@@ -8,6 +8,7 @@ import { type ActiveRoundData } from "@/lib/types";
 import CountdownText from "../_components/countdown-text";
 import { formatUnits } from "viem";
 import { AmountUSD } from "@/components/amount-usd";
+import Hint from "../_components/hint";
 
 export default function ActiveRoundPage({ data }: { data: ActiveRoundData }) {
   return (
@@ -31,9 +32,7 @@ export default function ActiveRoundPage({ data }: { data: ActiveRoundData }) {
         />
       </div>
 
-      {/* <SectionHeader text="Hint" /> */}
-
-      <br />
+      <div>{data.hint && <Hint hint={data.hint} />}</div>
 
       <div className="flex">
         <div className="min-w-48">
