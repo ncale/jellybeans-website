@@ -13,21 +13,24 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Lightbulb } from "lucide-react";
 import { toast } from "sonner";
 
-import { formatEther } from "viem";
+import { formatEther, Hex } from "viem";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { Control, useForm, useWatch } from "react-hook-form";
 
-import { writeContract, waitForTransactionReceipt } from "@wagmi/core";
-import { useAccount, useConfig } from "wagmi";
+import { waitForTransactionReceipt, writeContract } from "@wagmi/core";
+import { useAccount, useChainId, useConfig, useSendTransaction, useSwitchChain } from "wagmi";
 import { JellyBeansAbi } from "@/constants/JellyBeansAbi";
 import { JELLYBEANS_ADDRESS } from "@/constants/contracts";
 import { useCountdownPassed } from "@/lib/hooks";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { type ActiveRoundData, type RawSubmissionsData } from "@/lib/types";
 import { bigintDateNow } from "@/lib/utils";
 import { AmountUSD } from "@/components/amount-usd";
+import { chains, createSession, executeSession } from "@paywithglide/glide-js";
+import { glideConfig } from "@/lib/clients/glide";
+import { useEffect, useRef, useState } from "react";
 
 class NotConnectedError extends Error {
   constructor(message: string) {
@@ -59,6 +62,27 @@ const guessFormSchema = z.object({
 });
 type GuessForm = z.infer<typeof guessFormSchema>;
 
+// useDebouncedGuess returns guess value changes every 500ms. This avoids unnecessary network
+// requests when the user is still making changes.
+// It returns the guess value and `isDirty` which is set to true when the debounced value is
+// different from the actual value.
+const useDebouncedGuess = ({ control }: { control: Control<{ guess: number }> }) => {
+  const [debouncedGuess, setDebouncedGuess] = useState(control._defaultValues.guess || 0);
+  const timeout = useRef<NodeJS.Timeout>();
+
+  const guess = useWatch({ name: "guess", control });
+
+  useEffect(() => {
+    clearInterval(timeout.current);
+
+    timeout.current = setTimeout(() => {
+      setDebouncedGuess(guess);
+    }, 500);
+  }, [guess]);
+
+  return { guess: debouncedGuess, isDirty: guess !== debouncedGuess };
+};
+
 function SubmitForm({
   round,
   feeAmount,
@@ -76,22 +100,63 @@ function SubmitForm({
 
   const { address, isConnected } = useAccount();
   const queryClient = useQueryClient();
+  const currentChainId = useChainId();
+  const { switchChainAsync } = useSwitchChain();
+  const { sendTransactionAsync } = useSendTransaction();
 
   const isSubmissionPassed = useCountdownPassed(submissionDeadline);
+
+  const { guess, isDirty: isGuessDirty } = useDebouncedGuess({ control: form.control });
+
+  const { data: glideSession, isSuccess: isGlideSessionReady } = useQuery({
+    queryKey: ["glideSession", round, guess],
+    queryFn: async () => {
+      const session = await createSession(glideConfig, {
+        account: address,
+        chainId: chains.optimism.id,
+        address: JELLYBEANS_ADDRESS,
+        abi: JellyBeansAbi,
+        functionName: "submitGuess",
+        args: [BigInt(round), BigInt(guess)],
+        value: feeAmount,
+      });
+
+      return session;
+    },
+    // Ensure a new session is created every 30s to avoid expired sessions
+    refetchInterval: 30000,
+  });
 
   async function onSubmit(values: GuessForm) {
     console.log(values);
 
     try {
       if (!isConnected) throw new NotConnectedError("Connect wallet to submit.");
+      if (!glideSession) throw new Error("Transaction is not ready yet.");
 
-      const hash = await writeContract(config, {
-        abi: JellyBeansAbi,
-        address: JELLYBEANS_ADDRESS,
-        functionName: "submitGuess",
-        args: [BigInt(round), BigInt(values.guess)],
-        value: feeAmount,
-      });
+      let hash: Hex;
+      // If the user has funds on OP, continue with a direct `writeContract` call.
+      // Else, we pay using Glide with cross-chain payment.
+      if (glideSession.paymentChainId === `eip155:10`) {
+        hash = await writeContract(config, {
+          abi: JellyBeansAbi,
+          address: JELLYBEANS_ADDRESS,
+          functionName: "submitGuess",
+          args: [BigInt(round), BigInt(values.guess)],
+          value: feeAmount,
+        });
+      } else {
+        const { sponsoredTransactionHash } = await executeSession(glideConfig, {
+          session: glideSession,
+          // @ts-expect-error: wagmi types are not set correctly
+          currentChainId,
+          sendTransactionAsync,
+          switchChainAsync,
+        });
+
+        hash = sponsoredTransactionHash;
+      }
+
       toast.message("Pending confirmation...");
 
       queryClient.setQueryData(["round-data", round], (old: ActiveRoundData | undefined) => ({
@@ -181,7 +246,12 @@ function SubmitForm({
           <Button
             variant="secondary"
             type="submit"
-            disabled={form.formState.isSubmitting || isSubmissionPassed}
+            disabled={
+              !isGlideSessionReady ||
+              isGuessDirty ||
+              form.formState.isSubmitting ||
+              isSubmissionPassed
+            }
           >
             Submit
           </Button>
