@@ -8,23 +8,15 @@ import crypto from "crypto";
 const IV_LENGTH = 32;
 const MAX_ENCRYPTED_LENGTH = 32;
 
-const SECRET_KEY = process.env.SECRET_KEY;
-
 // Helpers
 function hexToDecimal(hex: string): string {
   return BigInt(`0x${hex}`).toString(10);
 }
 
 // Encryption
-const encrypt = (value: string): string => {
-  if (!SECRET_KEY) throw new Error("SECRET_KEY is not set");
-
+const encrypt = (value: string, key: string): string => {
   const iv = crypto.randomBytes(12);
-  const cipher = crypto.createCipheriv(
-    "aes-256-ctr",
-    SECRET_KEY,
-    Buffer.concat([iv, Buffer.alloc(4)]),
-  );
+  const cipher = crypto.createCipheriv("aes-256-ctr", key, Buffer.concat([iv, Buffer.alloc(4)]));
   const encrypted = Buffer.concat([cipher.update(value, "utf8"), cipher.final()]);
 
   const ivDecimal = hexToDecimal(iv.toString("hex"));
@@ -36,15 +28,19 @@ const encrypt = (value: string): string => {
 /** ENDPOINT */
 
 const encryptSchema = z.object({
+  round: z.number().int().positive().lt(1000),
   value: z.number().int().positive().lt(100_000_000),
 });
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { value } = encryptSchema.parse(body);
+    const { value, round } = encryptSchema.parse(body);
 
-    const compactData = encrypt(value.toString());
+    const key = process.env[`SECRET_KEY_ROUND_${round}`];
+    if (!key) throw new Error("No key found");
+
+    const compactData = encrypt(value.toString(), key);
 
     return NextResponse.json({ compactData });
   } catch (error) {
