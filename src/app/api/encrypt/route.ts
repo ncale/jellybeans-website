@@ -5,7 +5,6 @@ import crypto from "crypto";
 /** FUNCTIONS & HELPERS */
 
 // Constants
-const IV_LENGTH = 32;
 const MAX_ENCRYPTED_LENGTH = 32;
 
 // Helpers
@@ -15,21 +14,21 @@ function hexToDecimal(hex: string): string {
 
 // Encryption
 const encrypt = (value: string, key: string): string => {
-  const iv = crypto.randomBytes(12);
-  const cipher = crypto.createCipheriv("aes-256-ctr", key, Buffer.concat([iv, Buffer.alloc(4)]));
+  const iv = crypto.randomBytes(16);
+  const cipher = crypto.createCipheriv("aes-256-ctr", key, iv);
   const encrypted = Buffer.concat([cipher.update(value, "utf8"), cipher.final()]);
 
   const ivDecimal = hexToDecimal(iv.toString("hex"));
   const encryptedDecimal = hexToDecimal(encrypted.toString("hex"));
 
-  return ivDecimal.padStart(IV_LENGTH, "0") + encryptedDecimal.padStart(MAX_ENCRYPTED_LENGTH, "0");
+  return ivDecimal + encryptedDecimal.padStart(MAX_ENCRYPTED_LENGTH, "0");
 };
 
 /** ENDPOINT */
 
 const encryptSchema = z.object({
   round: z.number().int().positive().lt(1000),
-  value: z.number().int().positive().lt(100_000_000),
+  value: z.number().int().positive().lt(1_000_000_000),
 });
 
 export async function POST(request: Request) {

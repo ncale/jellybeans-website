@@ -5,7 +5,7 @@ import crypto from "crypto";
 /** FUNCTIONS & HELPERS */
 
 // Constants
-const IV_LENGTH = 32;
+const MAX_ENCRYPTED_LENGTH = 32;
 
 // Helpers
 function decimalToHex(decimal: string): string {
@@ -14,20 +14,16 @@ function decimalToHex(decimal: string): string {
 
 // Decryption
 export function decrypt(compactData: string, secretKey: string): string {
-  const ivDecimal = compactData.slice(0, IV_LENGTH);
-  const encryptedDecimal = compactData.slice(IV_LENGTH);
+  const ivDecimal = compactData.slice(0, -MAX_ENCRYPTED_LENGTH);
+  const encryptedDecimal = compactData.slice(-MAX_ENCRYPTED_LENGTH);
 
-  const ivHex = decimalToHex(ivDecimal);
-  const encryptedHex = decimalToHex(encryptedDecimal);
+  const ivHex = decimalToHex(ivDecimal).padStart(32, "0");
+  const encryptedHex = decimalToHex(encryptedDecimal).padStart(8, "0");
 
   const iv = Buffer.from(ivHex, "hex");
   const encrypted = Buffer.from(encryptedHex, "hex");
 
-  const decipher = crypto.createDecipheriv(
-    "aes-256-ctr",
-    secretKey,
-    Buffer.concat([iv, Buffer.alloc(4)]),
-  );
+  const decipher = crypto.createDecipheriv("aes-256-ctr", secretKey, iv);
   const decrypted = Buffer.concat([decipher.update(encrypted), decipher.final()]).toString("utf8");
 
   return decrypted;
@@ -45,9 +41,9 @@ export async function PUT(request: Request) {
     const body = await request.json();
     const { compactData, secretKey } = decryptSchema.parse(body);
 
-    const decryptedValue = decrypt(compactData, secretKey);
+    const decrypted = decrypt(compactData, secretKey);
 
-    return NextResponse.json({ decryptedValue });
+    return NextResponse.json({ decrypted });
   } catch (error) {
     console.error(error);
 
