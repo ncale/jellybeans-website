@@ -13,7 +13,7 @@ function decimalToHex(decimal: string): string {
 }
 
 // Decryption
-export function decrypt(compactData: string, secretKey: string): string {
+function decrypt(compactData: string, secretKey: string): string {
   const ivDecimal = compactData.slice(0, -MAX_ENCRYPTED_LENGTH);
   const encryptedDecimal = compactData.slice(-MAX_ENCRYPTED_LENGTH);
 
