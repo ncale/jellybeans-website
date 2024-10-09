@@ -53,7 +53,7 @@ export const tokens: Tokens[] = [
     description: "This token represents a prediction in Round 3 of Jelly Beans",
     collection: "jellybeans",
     round: 3,
-    image: `${BASE_URL}token-images/1.png`,
+    image: `${BASE_URL}token-images/3.png`,
     traits: [
       { trait_type: "name", value: "Wanda" },
       { trait_type: "project", value: "Optimism" },
