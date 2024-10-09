@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import UserText from "@/components/user-text";
 import { BLOCKSCOUT_BASE_URL, HINTS_URL } from "@/constants/links";
 import apiClient from "@/lib/api";
 import { formatSeconds } from "@/lib/utils";
@@ -85,7 +86,7 @@ function RecentSubmissionsList({ round }: { round: number }) {
         ago
       </TableCell>
       <TableCell className="py-1 font-medium">
-        <Submitter address={sub.submitter} />
+        <UserText address={sub.submitter} />
       </TableCell>
       {/* <TableCell className="py-1 text-center font-medium">
         {Number(sub.entry).toLocaleString()}
@@ -102,30 +103,3 @@ function RecentSubmissionsList({ round }: { round: number }) {
     </TableRow>
   ));
 }
-
-function Submitter({ address }: { address: string }) {
-  const { data, isLoading, isSuccess } = useQuery<EnsData>({
-    queryKey: ["ens-lookup", address],
-    queryFn: () => fetch(`https://api.ensdata.net/${address}`).then((res) => res.json()),
-    staleTime: Infinity,
-    gcTime: 1000 * 60 * 60,
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-  });
-  if (isLoading) return <>{address.slice(0, 7)}...</>;
-  if (!isSuccess) return <>{address.slice(0, 7)}...</>;
-  if (!data.ens_primary) return <>{address.slice(0, 7)}...</>;
-  return <>{data.ens_primary}</>;
-}
-
-type EnsData = {
-  address: string;
-  contentHash: null;
-  ens: string;
-  ens_primary: string;
-  resolverAddress: string;
-  wallets: {
-    eth: string;
-  };
-};

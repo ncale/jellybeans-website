@@ -14,20 +14,12 @@ export default function ActiveRoundPage({ data }: { data: ActiveRoundData }) {
   return (
     <>
       <div>
-        <SectionHeader
-          text="Question"
-          // infoText={"The data is evaluated according to ithout going over"}
-        />
+        <SectionHeader text="Question" />
         <p className="text-xl font-semibold">{data.question}</p>
       </div>
 
       <div className="space-y-1">
-        <SectionHeader
-          text="Submit a Prediction"
-          // infoText={
-          //   "Winners are payed out per submission, meaning if you make 5 submissions and 3 win, you win 3 prizes\n- - -\nAlso! Receive 1 NFT per submission 🥳"
-          // }
-        />
+        <SectionHeader text="Submit a Prediction" />
         <Submit
           round={data.id}
           feeAmount={data.feeAmount}

@@ -2,6 +2,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCaption, TableCell, TableRow } from "@/components/ui/table";
+import UserText from "@/components/user-text";
 import { BLOCKSCOUT_BASE_URL } from "@/constants/links";
 import { PastRoundData } from "@/lib/types";
 import { ExternalLink } from "lucide-react";
@@ -32,8 +33,10 @@ export default function WinnersTable({ data }: { data: PastRoundData }) {
                 </TableRow>
               ) : (
                 data.winners.map((winner, i) => (
-                  <TableRow key={i}>
-                    <TableCell className="font-medium">{winner.slice(0, 12)}...</TableCell>
+                  <TableRow key={`winner-${i}`}>
+                    <TableCell className="font-medium">
+                      <UserText address={winner} />
+                    </TableCell>
                     <TableCell className="text-right font-medium">
                       {data.winningAnswer.toString()}
                     </TableCell>
