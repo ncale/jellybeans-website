@@ -63,4 +63,52 @@ export const tokens: Tokens[] = [
     token_standard: "ERC-1155",
     external_url: `${BASE_URL}round/3`,
   },
+  {
+    id: BigInt(4),
+    name: "Jelly Beans Round 4",
+    description: "This token represents a prediction in Round 4 of Jelly Beans",
+    collection: "jellybeans",
+    round: 4,
+    image: `${BASE_URL}token-images/4.png`,
+    traits: [
+      { trait_type: "name", value: "" }, // ! Need to update
+      { trait_type: "project", value: "" }, // ! Need to update
+    ],
+    artist: "Onchain Clarity Co",
+    blockchain: "OP Mainnet",
+    token_standard: "ERC-1155",
+    external_url: `${BASE_URL}round/4`,
+  },
+  {
+    id: BigInt(5),
+    name: "Jelly Beans Round 5",
+    description: "This token represents a prediction in Round 5 of Jelly Beans",
+    collection: "jellybeans",
+    round: 5,
+    image: `${BASE_URL}token-images/5.png`,
+    traits: [
+      { trait_type: "name", value: "" }, // ! Need to update
+      { trait_type: "project", value: "" }, // ! Need to update
+    ],
+    artist: "Onchain Clarity Co",
+    blockchain: "OP Mainnet",
+    token_standard: "ERC-1155",
+    external_url: `${BASE_URL}round/5`,
+  },
+  {
+    id: BigInt(6),
+    name: "Jelly Beans Round 6",
+    description: "This token represents a prediction in Round 6 of Jelly Beans",
+    collection: "jellybeans",
+    round: 6,
+    image: `${BASE_URL}token-images/6.png`,
+    traits: [
+      { trait_type: "name", value: "" }, // ! Need to update
+      { trait_type: "project", value: "" }, // ! Need to update
+    ],
+    artist: "Onchain Clarity Co",
+    blockchain: "OP Mainnet",
+    token_standard: "ERC-1155",
+    external_url: `${BASE_URL}round/6`,
+  },
 ];
