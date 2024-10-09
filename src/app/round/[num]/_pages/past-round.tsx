@@ -3,7 +3,7 @@
 import Hint from "../_components/hint";
 import SectionHeader from "../_components/section-header";
 import WinnersTable from "../_components/winners-table";
-import YourSubmissions from "../_components/your-submissions";
+// import YourSubmissions from "../_components/your-submissions";
 import { AmountUSD } from "@/components/amount-usd";
 
 import { formatUnits } from "viem";
@@ -48,7 +48,7 @@ export default function PastRoundPage({ data }: { data: PastRoundData }) {
 
       <WinnersTable data={data} />
 
-      <YourSubmissions round={data.id} />
+      {/* <YourSubmissions round={data.id} /> */}
     </>
   );
 }

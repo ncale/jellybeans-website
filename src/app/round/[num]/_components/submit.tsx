@@ -85,11 +85,23 @@ function SubmitForm({
     try {
       if (!isConnected) throw new NotConnectedError("Connect wallet to submit.");
 
+      const res = await fetch("/api/encrypt", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ round, value: values.guess }),
+      });
+      if (!res.ok) {
+        throw new Error("Encryption failed");
+      }
+      const data = (await res.json()) as { compactData: string };
+
+      console.log(data.compactData);
+
       const hash = await writeContract(config, {
         abi: JellyBeansAbi,
         address: JELLYBEANS_ADDRESS,
         functionName: "submitGuess",
-        args: [BigInt(round), BigInt(values.guess)],
+        args: [BigInt(round), BigInt(data.compactData)],
         value: feeAmount,
       });
       toast.message("Pending confirmation...");

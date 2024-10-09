@@ -2,7 +2,7 @@
 
 import SectionHeader from "../_components/section-header";
 import Submit from "../_components/submit";
-import YourSubmissions from "../_components/your-submissions";
+// import YourSubmissions from "../_components/your-submissions";
 import CountdownText from "../_components/countdown-text";
 import Hint from "../_components/hint";
 import { AmountUSD } from "@/components/amount-usd";
@@ -66,10 +66,10 @@ export default function ActiveRoundPage({ data }: { data: ActiveRoundData }) {
         </div>
       </div>
 
-      <div className="space-y-1">
+      {/* <div className="space-y-1">
         <SectionHeader text="Your Submissions" />
         <YourSubmissions round={data.id} />
-      </div>
+      </div> */}
     </>
   );
 }

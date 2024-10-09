@@ -17,8 +17,12 @@ import { ExternalLink } from "lucide-react";
 
 export default function RecentSubmissions({ round }: { round: number }) {
   return (
-    <div className="space-y-1">
+    <div>
       <h3 className="font-medium">Recent Submissions</h3>
+      <p className="mb-1 text-sm font-normal text-muted-foreground">
+        All submissions are encrypted until after the round ends.
+      </p>
+
       <Table className="text-muted-foreground">
         <TableCaption>
           <a
@@ -34,7 +38,7 @@ export default function RecentSubmissions({ round }: { round: number }) {
           <TableRow>
             <TableHead className="w-28 text-center font-semibold">Time</TableHead>
             <TableHead className="font-semibold">Address</TableHead>
-            <TableHead className="w-16 text-center font-semibold">Guess</TableHead>
+            {/* <TableHead className="w-16 text-center font-semibold">Guess</TableHead> */}
             <TableHead className="w-16"></TableHead>
           </TableRow>
         </TableHeader>
@@ -83,9 +87,9 @@ function RecentSubmissionsList({ round }: { round: number }) {
       <TableCell className="py-1 font-medium">
         <Submitter address={sub.submitter} />
       </TableCell>
-      <TableCell className="py-1 text-center font-medium">
+      {/* <TableCell className="py-1 text-center font-medium">
         {Number(sub.entry).toLocaleString()}
-      </TableCell>
+      </TableCell> */}
       <TableCell className="py-1">
         <a
           href={`${BLOCKSCOUT_BASE_URL}tx/${sub.txnHash}`}
