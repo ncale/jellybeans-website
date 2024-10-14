@@ -71,8 +71,8 @@ export const tokens: Tokens[] = [
     round: 4,
     image: `${BASE_URL}token-images/4.png`,
     traits: [
-      { trait_type: "name", value: "" }, // ! Need to update
-      { trait_type: "project", value: "" }, // ! Need to update
+      { trait_type: "name", value: "Sam" },
+      { trait_type: "project", value: "Polymarket" },
     ],
     artist: "Onchain Clarity Co",
     blockchain: "OP Mainnet",
@@ -87,8 +87,8 @@ export const tokens: Tokens[] = [
     round: 5,
     image: `${BASE_URL}token-images/5.png`,
     traits: [
-      { trait_type: "name", value: "" }, // ! Need to update
-      { trait_type: "project", value: "" }, // ! Need to update
+      { trait_type: "name", value: "Hugo" },
+      { trait_type: "project", value: "pump.fun" },
     ],
     artist: "Onchain Clarity Co",
     blockchain: "OP Mainnet",
@@ -103,8 +103,8 @@ export const tokens: Tokens[] = [
     round: 6,
     image: `${BASE_URL}token-images/6.png`,
     traits: [
-      { trait_type: "name", value: "" }, // ! Need to update
-      { trait_type: "project", value: "" }, // ! Need to update
+      { trait_type: "name", value: "Chester" },
+      { trait_type: "project", value: "Layer3" },
     ],
     artist: "Onchain Clarity Co",
     blockchain: "OP Mainnet",
