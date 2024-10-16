@@ -18,7 +18,7 @@ function decrypt(compactData: string, secretKey: string): string {
   const encryptedDecimal = compactData.slice(-MAX_ENCRYPTED_LENGTH);
 
   const ivHex = decimalToHex(ivDecimal).padStart(32, "0");
-  const encryptedHex = decimalToHex(encryptedDecimal).padStart(8, "0");
+  const encryptedHex = decimalToHex(encryptedDecimal);
 
   const iv = Buffer.from(ivHex, "hex");
   const encrypted = Buffer.from(encryptedHex, "hex");
