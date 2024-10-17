@@ -27,7 +27,7 @@ export default function ActiveRoundPage({ data }: { data: ActiveRoundData }) {
         />
       </div>
 
-      <div>{data.hint && <Hint hint={data.hint} />}</div>
+      <div>{data.hint && <Hint round={data.id} hint={data.hint} />}</div>
 
       <div className="flex">
         <div className="min-w-48">

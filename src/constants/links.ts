@@ -12,7 +12,7 @@ export const HINTS_URL =
 // Base URLs (for linking to txns or dashboards)
 
 export const BLOCKSCOUT_BASE_URL = "https://optimism.blockscout.com/";
-export const DUNE_SUBMISSIONS_URL = "https://dune.com/";
+export const DUNE_SUBMISSIONS_URL = "https://dune.com/limesdoteth/";
 
 // Service URLs
 

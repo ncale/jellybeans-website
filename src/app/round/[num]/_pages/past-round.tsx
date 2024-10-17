@@ -17,7 +17,7 @@ export default function PastRoundPage({ data }: { data: PastRoundData }) {
         <p className="text-xl font-semibold">{data.question}</p>
       </div>
 
-      <div>{data.hint && <Hint hint={data.hint} />}</div>
+      <div>{data.hint && <Hint round={data.id} hint={data.hint} />}</div>
 
       <div className="flex">
         <div className="min-w-48">
