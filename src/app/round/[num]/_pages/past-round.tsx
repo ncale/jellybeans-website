@@ -2,7 +2,6 @@
 
 import Hint from "../_components/hint";
 import SectionHeader from "../_components/section-header";
-import WinnersTable from "../_components/winners-table";
 // import YourSubmissions from "../_components/your-submissions";
 import { AmountUSD } from "@/components/amount-usd";
 
@@ -45,8 +44,6 @@ export default function PastRoundPage({ data }: { data: PastRoundData }) {
           <p className="text-xl font-semibold">{data.submissionCount}</p>
         </div>
       </div>
-
-      <WinnersTable data={data} />
 
       {/* <YourSubmissions round={data.id} /> */}
     </>
