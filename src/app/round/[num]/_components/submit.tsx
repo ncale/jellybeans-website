@@ -28,11 +28,19 @@ import { useQueryClient } from "@tanstack/react-query";
 import { type ActiveRoundData, type RawSubmissionsData } from "@/lib/types";
 import { bigintDateNow } from "@/lib/utils";
 import { AmountUSD } from "@/components/amount-usd";
+import { useChainModal } from "@rainbow-me/rainbowkit";
 
 class NotConnectedError extends Error {
   constructor(message: string) {
     super(message);
     this.name = "NotConnectedError";
+  }
+}
+
+class WrongChainError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "WrongChainError";
   }
 }
 
@@ -74,7 +82,8 @@ function SubmitForm({
     defaultValues: { guess: 0 },
   });
 
-  const { address, isConnected } = useAccount();
+  const { address, isConnected, chainId } = useAccount();
+  const { openChainModal } = useChainModal();
   const queryClient = useQueryClient();
 
   const isSubmissionPassed = useCountdownPassed(submissionDeadline);
@@ -84,6 +93,7 @@ function SubmitForm({
 
     try {
       if (!isConnected) throw new NotConnectedError("Connect wallet to submit.");
+      if (chainId !== 10) throw new WrongChainError("Switch to OP Mainnet to submit");
 
       const res = await fetch("/api/encrypt", {
         method: "POST",
@@ -154,6 +164,9 @@ function SubmitForm({
 
       if (error instanceof NotConnectedError) {
         toast.error(error.message);
+      } else if (error instanceof WrongChainError) {
+        toast.error(error.message);
+        if (openChainModal) openChainModal();
       } else {
         toast.error("Oops! Something went wrong.");
       }
