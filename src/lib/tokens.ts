@@ -120,7 +120,7 @@ export const tokens: Tokens[] = [
     image: `${BASE_URL}token-images/7.png`,
     traits: [
       { trait_type: "name", value: "Remy" },
-      { trait_type: "project", value: "Blackbird" },
+      { trait_type: "project", value: "EFP" },
     ],
     artist: "Onchain Clarity Co",
     blockchain: "OP Mainnet",
