@@ -19,9 +19,10 @@ function decrypt(compactData: string, secretKey: string): string {
 
   const ivHex = decimalToHex(ivDecimal).padStart(32, "0");
   const encryptedHex = decimalToHex(encryptedDecimal);
+  const paddedHex = encryptedHex.padStart((encryptedHex.length % 2) + encryptedHex.length, "0");
 
   const iv = Buffer.from(ivHex, "hex");
-  const encrypted = Buffer.from(encryptedHex, "hex");
+  const encrypted = Buffer.from(paddedHex, "hex");
 
   const decipher = crypto.createDecipheriv("aes-256-ctr", secretKey, iv);
   const decrypted = Buffer.concat([decipher.update(encrypted), decipher.final()]).toString("utf8");
