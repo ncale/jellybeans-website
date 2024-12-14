@@ -175,4 +175,20 @@ export const tokens: Tokens[] = [
     token_standard: "ERC-1155",
     external_url: `${BASE_URL}round/10`,
   },
+  {
+    id: BigInt(11),
+    name: "Jelly Beans Round 11",
+    description: "This token represents a prediction in Round 11 of Jelly Beans",
+    collection: "jellybeans",
+    round: 11,
+    image: `${BASE_URL}token-images/11.png`,
+    traits: [
+      { trait_type: "name", value: "Hugo" },
+      { trait_type: "project", value: "Linea" },
+    ],
+    artist: "Onchain Clarity Co",
+    blockchain: "OP Mainnet",
+    token_standard: "ERC-1155",
+    external_url: `${BASE_URL}round/11`,
+  },
 ];
